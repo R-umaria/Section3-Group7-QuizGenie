@@ -2,7 +2,7 @@ output/
 
 # This file contains sensitive information and should not be shared
 Server/pdf_mcq_generator/config.py
-
+Server\pdf_mcq_generator\config.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
