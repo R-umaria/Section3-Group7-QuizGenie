@@ -1,12 +1,11 @@
 output/
-
+config.py
 # This file contains sensitive information and should not be shared
-Server/pdf_mcq_generator/config.py
-Server\pdf_mcq_generator\config.py
-# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
 # C extensions
 *.so
+structure.txt
+C:\Users\Rishi\source\repos\Project 4\Group Project\QuizGenie\Server\pdf_mcq_generator\config.py
