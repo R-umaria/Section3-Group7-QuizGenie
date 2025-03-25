@@ -27,5 +27,5 @@ SOURCES += main.cpp \
 HEADERS += mainwindow.h \
            client.h
 
-FORMS += mainwindow.ui \
+FORMS += Client/mainwindow.ui \
     mainwindow.ui
