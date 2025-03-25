@@ -18,7 +18,7 @@ HEADERS += client.h mainwindow.h ui_mainwindow.h
 SOURCES += client.cpp main.cpp mainwindow.cpp
 
 
-QT += core gui widgets
+QT += core gui widgets network
 CONFIG += c++17
 SOURCES += main.cpp \
            mainwindow.cpp \
@@ -27,4 +27,5 @@ SOURCES += main.cpp \
 HEADERS += mainwindow.h \
            client.h
 
-FORMS += mainwindow.ui
+FORMS += mainwindow.ui \
+    mainwindow.ui
