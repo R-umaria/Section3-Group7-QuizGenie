@@ -6,13 +6,13 @@ HomePage::HomePage(QWidget *parent, QString userName) :
     QWidget(parent),
     ui(new Ui::HomePage),
     loadingMovie(nullptr),
-    csvCheckTimer(new QTimer(this))
+    csvCheckTimer(new QTimer(this)),
+    userName(userName)
 {
     ui->setupUi(this);
+
     QPixmap pix(":/assets/logo_horizontal.png");
-    int w = ui->logo_horizontal->width ();
-    int h = ui->logo_horizontal->height ();
-    ui->logo_horizontal->setPixmap (pix.scaled(w,h,Qt::KeepAspectRatio));
+    ui->logo_horizontal->setPixmap(pix.scaled(ui->logo_horizontal->width(), ui->logo_horizontal->height(), Qt::KeepAspectRatio));
 
     // Set user's name from login
     ui->labelUserName->setText("Welcome, " + userName);
@@ -26,7 +26,7 @@ HomePage::HomePage(QWidget *parent, QString userName) :
     ui->btnStartQuiz->setEnabled(false);
 
     // Create a loading spinner
-    loadingMovie = new QMovie(":/assets/loading.gif"); // Ensure you have a loading GIF
+    loadingMovie = new QMovie(":/assets/loading.gif");
     ui->labelLoading->setMovie(loadingMovie);
     ui->labelLoading->setVisible(false);
 
@@ -46,7 +46,7 @@ void HomePage::on_btnUploadPDF_clicked()
     QString filePath = QFileDialog::getOpenFileName(this, "Select PDF File", "", "PDF Files (*.pdf)");
 
     if (filePath.isEmpty()) {
-        return;  // No file selected
+        return;  // User canceled file selection
     }
 
     // Define the destination folder
@@ -56,7 +56,11 @@ void HomePage::on_btnUploadPDF_clicked()
     // Define the new file path
     QString newFilePath = destinationFolder + QFileInfo(filePath).fileName();
 
-    // Copy the file to the destination folder
+    // Ensure the file is not already copied
+    if (QFile::exists(newFilePath)) {
+        QFile::remove(newFilePath);  // Remove existing file before copying
+    }
+
     if (QFile::copy(filePath, newFilePath)) {
         ui->labelPDFStatus->setText("File Uploaded: " + QFileInfo(newFilePath).fileName());
         pdfFilePath = newFilePath; // Store the PDF path
@@ -110,7 +114,9 @@ void HomePage::checkForCSVFile()
 
 void HomePage::on_btnStartQuiz_clicked()
 {
-    QMessageBox::information(this, "Start Quiz", "The quiz will start now!");
-
-    // Here, transition to the quiz page
+    QuizScreen *quizScreen = new QuizScreen(this, userName);
+    quizScreen->show();
+    this->close();
 }
+
+

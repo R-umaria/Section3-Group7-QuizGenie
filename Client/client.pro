@@ -11,11 +11,13 @@ CONFIG += c++17
 SOURCES += \
     homepage.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    quizscreen.cpp
 
 HEADERS += \
     homepage.h \
-    mainwindow.h
+    mainwindow.h \
+    quizscreen.h
 
 FORMS += \
     homepage.ui \

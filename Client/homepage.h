@@ -7,6 +7,8 @@
 #include <QMessageBox>
 #include <QMovie>
 #include <QTimer>
+#include "quizscreen.h"
+
 
 namespace Ui {
 class HomePage;
@@ -31,6 +33,7 @@ private:
     QString pdfFilePath;
     QMovie *loadingMovie;
     QTimer *csvCheckTimer;
+    QString userName;
 };
 
 #endif // HOMEPAGE_H
