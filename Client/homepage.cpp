@@ -2,12 +2,13 @@
 #include "ui_homepage.h"
 #include <QDir>
 
-HomePage::HomePage(QWidget *parent, QString userName) :
+HomePage::HomePage(Client *client, QWidget *parent, QString userName) :
     QWidget(parent),
     ui(new Ui::HomePage),
     loadingMovie(nullptr),
     csvCheckTimer(new QTimer(this)),
-    userName(userName)
+    userName(userName),
+    client(client)
 {
     ui->setupUi(this);
 
@@ -48,7 +49,7 @@ void HomePage::on_btnUploadPDF_clicked()
     if (filePath.isEmpty()) {
         return;  // User canceled file selection
     }
-
+/*
     // Define the destination folder
     QString destinationFolder = QDir::currentPath() + "/UploadedPDFs/";
     QDir().mkpath(destinationFolder); // Ensure the directory exists
@@ -66,7 +67,7 @@ void HomePage::on_btnUploadPDF_clicked()
         pdfFilePath = newFilePath; // Store the PDF path
     } else {
         QMessageBox::warning(this, "Upload Failed", "Could not save the file!");
-    }
+    } */
 }
 
 void HomePage::on_btnGenerateQuiz_clicked()

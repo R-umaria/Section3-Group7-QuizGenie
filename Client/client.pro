@@ -10,8 +10,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 #DEFINES += QT_DISABLE_DEPRECATED_UP_TO=0x060000 # disables all APIs deprecated in Qt 6.0.0 and earlier
 
 # Input
-HEADERS += client.h mainwindow.h ui_mainwindow.h
-SOURCES += client.cpp main.cpp mainwindow.cpp
+HEADERS +=
+
+SOURCES +=
 
 
 QT += core gui widgets network
@@ -26,14 +27,17 @@ SOURCES += \
     homepage.cpp \
     main.cpp \
     mainwindow.cpp \
-    quizscreen.cpp
+    quizscreen.cpp \
+    client.cpp
 
 HEADERS += \
     homepage.h \
     mainwindow.h \
-    quizscreen.h
+    quizscreen.h \
+    client.h \
+    ui_mainwindow.h
 
-FORMS += Client/mainwindow.ui \
+FORMS +=  \
     homepage.ui \
     mainwindow.ui
 

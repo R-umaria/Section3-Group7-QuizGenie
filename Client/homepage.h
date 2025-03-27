@@ -8,6 +8,7 @@
 #include <QMovie>
 #include <QTimer>
 #include "quizscreen.h"
+#include "client.h"
 
 
 namespace Ui {
@@ -19,7 +20,7 @@ class HomePage : public QWidget
     Q_OBJECT
 
 public:
-    explicit HomePage(QWidget *parent = nullptr, QString userName = "");
+    explicit HomePage(Client *client, QWidget *parent = nullptr, QString userName = "");
     ~HomePage();
 
 private slots:
@@ -34,6 +35,7 @@ private:
     QMovie *loadingMovie;
     QTimer *csvCheckTimer;
     QString userName;
+    Client *client;
 };
 
 #endif // HOMEPAGE_H

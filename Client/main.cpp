@@ -5,7 +5,16 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+
+    Client *client = new Client();
+    client->connectToServer();
+
+    MainWindow w(client);
     w.show();
-    return a.exec();
+    int result = a.exec();
+
+    //Safely deletes the client before exiting
+    delete client;
+
+    return result;
 }
