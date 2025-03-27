@@ -3,6 +3,7 @@ import pandas as pd
 def save_questions_to_csv(questions, output_csv_path):
     """
     Saves the MCQs to a CSV file with proper formatting.
+    Ensures questions and options with commas are properly quoted.
     """
     formatted_questions = []
 
@@ -16,6 +17,10 @@ def save_questions_to_csv(questions, output_csv_path):
             "Correct Answer": q["answer"]
         })
 
+    # Convert the list of formatted questions into a DataFrame
     df = pd.DataFrame(formatted_questions)
-    df.to_csv(output_csv_path, index=False)
+    
+    # Save to CSV with quoting enabled to handle commas inside fields
+    df.to_csv(output_csv_path, index=False, quotechar='"', quoting=1)  # quoting=1 ensures non-numeric fields are quoted
+    
     print(f"✅ Questions saved successfully to {output_csv_path}")

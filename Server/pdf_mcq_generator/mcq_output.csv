@@ -1,0 +1,11 @@
+Question,Option 1,Option 2,Option 3,Option 4,Correct Answer
+What is a key consideration for desktop UI design regarding screen resolutions?,Ignoring screen resolution differences,Ensuring elements aren't distorted,Using only one standard resolution,Focusing solely on high-density screens,Ensuring elements aren't distorted
+What is the difference between modal and nonmodal dialogs?,They are interchangeable terms,"Modal requires user interaction before proceeding, nonmodal allows multitasking","Modal is for mobile, nonmodal for desktop","Nonmodal requires user interaction, modal allows multitasking","Modal requires user interaction before proceeding, nonmodal allows multitasking"
+What is a recommended button hit area size for standard screens?,20-30px,44px to 57px,60-70px,88px to 114px,44px to 57px
+Which app type is described as 'web-based content delivered through an app interface'?,Mobile-Specific Website,Responsive Site,Native App,Hybrid App,Hybrid App
+What is an example of an Augmented Reality (AR) application?,A virtual reality headset,A car dashboard,Snapchat lenses,A website,Snapchat lenses
+Which information architecture pattern involves a central hub connecting to different sections?,Hierarchy Pattern,Nested Doll Pattern,Hub & Spoke Pattern,Tabbed View Pattern,Hub & Spoke Pattern
+What is a key best practice for user interface design?,Ignoring user feedback,Using only one design for all platforms,Keeping user interactions intuitive and accessible,Ignoring compatibility with target platforms,Keeping user interactions intuitive and accessible
+What is the primary purpose of a survey?,To design user interfaces,To collect data from a sample of individuals,To develop mobile applications,To test hardware compatibility,To collect data from a sample of individuals
+"According to the text, what type of UI pattern uses multiple views under different tabs?",Bento Box Pattern,Filtered View Pattern,Tabbed View Pattern,Nested Doll Pattern,Tabbed View Pattern
+What is the recommended button hit area size for high-density screens?,44px to 57px,88px to 114px,22px to 28.5px,176px to 228px,88px to 114px
