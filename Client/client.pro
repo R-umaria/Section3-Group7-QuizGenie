@@ -10,11 +10,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 #DEFINES += QT_DISABLE_DEPRECATED_UP_TO=0x060000 # disables all APIs deprecated in Qt 6.0.0 and earlier
 
 # Input
-HEADERS +=
-
-SOURCES +=
-
-
 QT += core gui widgets network
 
 CONFIG += c++17

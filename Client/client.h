@@ -13,7 +13,8 @@ public:
     ~Client();
     void connectToServer();
     bool authenticate(const QString &username, const QString &password);
-    void sendPDF(const QString &filePath);
+    void sendPDF(const QString &pdfFilePath);
+    void receiveCSV();
     bool isAuthenticated() const;
 
 private:

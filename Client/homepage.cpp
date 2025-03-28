@@ -1,6 +1,7 @@
 #include "homepage.h"
 #include "ui_homepage.h"
 #include <QDir>
+//#include <QDebug>
 
 HomePage::HomePage(Client *client, QWidget *parent, QString userName) :
     QWidget(parent),
@@ -19,9 +20,10 @@ HomePage::HomePage(Client *client, QWidget *parent, QString userName) :
     ui->labelUserName->setText("Welcome, " + userName);
 
     // Connect button signals
-    connect(ui->btnUploadPDF, &QPushButton::clicked, this, &HomePage::on_btnUploadPDF_clicked);
-    connect(ui->btnGenerateQuiz, &QPushButton::clicked, this, &HomePage::on_btnGenerateQuiz_clicked);
-    connect(ui->btnStartQuiz, &QPushButton::clicked, this, &HomePage::on_btnStartQuiz_clicked);
+        //don't need to be connected, QT does it automatically
+    //connect(ui->btnUploadPDF, &QPushButton::clicked, this, &HomePage::on_btnUploadPDF_clicked);
+    //connect(ui->btnGenerateQuiz, &QPushButton::clicked, this, &HomePage::on_btnGenerateQuiz_clicked);
+    //connect(ui->btnStartQuiz, &QPushButton::clicked, this, &HomePage::on_btnStartQuiz_clicked);
 
     // Disable start button initially
     ui->btnStartQuiz->setEnabled(false);
@@ -49,7 +51,7 @@ void HomePage::on_btnUploadPDF_clicked()
     if (filePath.isEmpty()) {
         return;  // User canceled file selection
     }
-/*
+
     // Define the destination folder
     QString destinationFolder = QDir::currentPath() + "/UploadedPDFs/";
     QDir().mkpath(destinationFolder); // Ensure the directory exists
@@ -67,7 +69,7 @@ void HomePage::on_btnUploadPDF_clicked()
         pdfFilePath = newFilePath; // Store the PDF path
     } else {
         QMessageBox::warning(this, "Upload Failed", "Could not save the file!");
-    } */
+    }
 }
 
 void HomePage::on_btnGenerateQuiz_clicked()
@@ -76,6 +78,9 @@ void HomePage::on_btnGenerateQuiz_clicked()
         QMessageBox::warning(this, "No PDF Selected", "Please upload a PDF before generating the quiz.");
         return;
     }
+
+    //Send the pdf to the server
+    client->sendPDF(pdfFilePath);
 
     // Show loading spinner
     ui->labelLoading->setVisible(true);
@@ -88,6 +93,9 @@ void HomePage::on_btnGenerateQuiz_clicked()
 
     // Simulate sending PDF to server (Backend handles this)
     QMessageBox::information(this, "Quiz Generation", "The quiz is being generated. Please wait...");
+
+    //Receive CSV response from server
+    client->receiveCSV();
 
     // Start checking for CSV every 3 seconds
     csvCheckTimer->start(3000);

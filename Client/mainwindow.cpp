@@ -28,7 +28,8 @@ void MainWindow::on_loginButton_clicked()
     QString password = ui->Password_txtfield->text();
 
     //pass the entered username and password to the client
-    if (client->authenticate(username, password)) {
+   // if (client->authenticate(username, password)) {
+    if(username == "admin" && password == "1234") { //for testing
         QMessageBox::information(this, "Login", "Login successful!");
 
         // Open HomePage and pass the user's name
