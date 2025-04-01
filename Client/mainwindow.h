@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
-//#include "homepage.h"
+#include "homepage.h"
 #include "client.h"
 
 QT_BEGIN_NAMESPACE
@@ -26,5 +26,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Client *client;
+
 };
 #endif // MAINWINDOW_H

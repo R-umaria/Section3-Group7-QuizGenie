@@ -22,21 +22,24 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_loginButton_clicked()
-{
+void MainWindow::on_loginButton_clicked() {
     QString username = ui->User_name_txtfield->text();
     QString password = ui->Password_txtfield->text();
 
-    //pass the entered username and password to the client
-   // if (client->authenticate(username, password)) {
-    if(username == "admin" && password == "1234") { //for testing
-        QMessageBox::information(this, "Login", "Login successful!");
+    // Test bypass for admin
+    if (username == "admin" && password == "1234") {
+        QMessageBox::information(this, "Login", "Login successful (test bypass)");
 
-        // Open HomePage and pass the user's name
+        // 🔐 Do real authentication too (send username to server)
+        client->authenticate(username, password);
+
+        // Use local variable instead of class-level homePage
         HomePage *homePage = new HomePage(client, nullptr, "Admin User");
         homePage->show();
-        this->close();  // Close login window
-    } else {
-        QMessageBox::warning(this, "Login", "Invalid username or password!");
+        this->close();
+        return;
     }
+
+    // Optional: for other users if needed
+    QMessageBox::warning(this, "Login", "Invalid username or password!");
 }

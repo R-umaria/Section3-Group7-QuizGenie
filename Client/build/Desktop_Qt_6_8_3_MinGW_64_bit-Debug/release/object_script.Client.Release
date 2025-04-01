@@ -1,0 +1,10 @@
+release/homepage.o
+release/main.o
+release/mainwindow.o
+release/quizscreen.o
+release/client.o
+release/qrc_resources.o
+release/moc_homepage.o
+release/moc_mainwindow.o
+release/moc_quizscreen.o
+release/moc_client.o
