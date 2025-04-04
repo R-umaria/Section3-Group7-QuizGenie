@@ -2,14 +2,13 @@
 #define QUIZSCREEN_H
 
 #include <QWidget>
-#include <QVBoxLayout>
-#include <QLabel>
-#include <QPushButton>
-#include <QRadioButton>
-#include <QButtonGroup>
-#include <QFile>
-#include <QTextStream>
 #include <QVector>
+#include "ui_quizscreen.h"
+
+namespace Ui {
+class QuizScreen;
+}
+QT_END_NAMESPACE
 
 struct QuizQuestion {
     QString question;
@@ -38,14 +37,7 @@ private:
     int currentQuestionIndex;
     int score;
 
-    // UI Elements
-    QLabel *labelUserName;
-    QLabel *labelQuestion;
-    QRadioButton *optionButtons[4];
-    QButtonGroup *buttonGroup;
-    QPushButton *btnNext;
-    QPushButton *btnSubmit;
-    QVBoxLayout *mainLayout;
+    Ui::Form *ui;
 };
 
 #endif // QUIZSCREEN_H

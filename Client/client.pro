@@ -21,7 +21,8 @@ HEADERS += \
 
 FORMS += \
     homepage.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    quizscreen.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -33,3 +34,6 @@ TARGET = Client
 
 RESOURCES += \
     resources.qrc
+
+# Ensure the CSV file is included in the project
+DISTFILES += UploadedPDFs/mcq_output.csv

@@ -114,9 +114,10 @@ void HomePage::checkForCSVFile()
 
 void HomePage::on_btnStartQuiz_clicked()
 {
+    qDebug() << "Starting QuizScreen";
     QuizScreen *quizScreen = new QuizScreen(this, userName);
     quizScreen->show();
-    this->close();
+    qDebug() << "QuizScreen shown";
+    this->hide(); // Use hide() instead of close()
+    qDebug() << "HomePage hidden";
 }
-
-
