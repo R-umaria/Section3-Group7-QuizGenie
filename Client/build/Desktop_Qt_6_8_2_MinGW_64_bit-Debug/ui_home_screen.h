@@ -52,7 +52,7 @@ public:
         sizePolicy.setHeightForWidth(HomePage->sizePolicy().hasHeightForWidth());
         HomePage->setSizePolicy(sizePolicy);
         HomePage->setToolTipDuration(-2);
-        HomePage->setStyleSheet(QString::fromUtf8("background-color: #FAF6F0;"));
+        HomePage->setStyleSheet(QString::fromUtf8("background-color: #e8dfec;"));
         horizontalLayout_4 = new QHBoxLayout(HomePage);
         horizontalLayout_4->setObjectName("horizontalLayout_4");
         centralvertical = new QWidget(HomePage);
@@ -124,7 +124,7 @@ public:
         main_upload_widget->setMinimumSize(QSize(1000, 300));
         main_upload_widget->setMaximumSize(QSize(1000, 300));
         main_upload_widget->setAcceptDrops(false);
-        main_upload_widget->setStyleSheet(QString::fromUtf8("background-color: rgba(145, 129, 138, 0.1);\n"
+        main_upload_widget->setStyleSheet(QString::fromUtf8("background-color: rgba(255, 255, 255, 1);\n"
 "border-radius: 12px;"));
         verticalLayout = new QVBoxLayout(main_upload_widget);
         verticalLayout->setSpacing(1);
@@ -144,7 +144,7 @@ public:
         QFont font1;
         font1.setPointSize(18);
         label_2->setFont(font1);
-        label_2->setStyleSheet(QString::fromUtf8("color: #91818A; background-color: none;"));
+        label_2->setStyleSheet(QString::fromUtf8("color: #7865c8; background-color: none;"));
         label_2->setLineWidth(0);
         label_2->setScaledContents(false);
         label_2->setWordWrap(true);
@@ -165,8 +165,9 @@ public:
         btnUploadPDF->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
         btnUploadPDF->setAutoFillBackground(false);
         btnUploadPDF->setStyleSheet(QString::fromUtf8("padding: 10px; \n"
-"background-color: #91818A;\n"
-"color: #FAF6F0;"));
+"color: #211726;\n"
+"border: 2px solid #211726;\n"
+"border-radius: 8px;"));
         QIcon icon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentNew));
         btnUploadPDF->setIcon(icon);
         btnUploadPDF->setIconSize(QSize(28, 28));
@@ -188,7 +189,9 @@ public:
         QFont font3;
         font3.setPointSize(12);
         labelPDFStatus->setFont(font3);
-        labelPDFStatus->setStyleSheet(QString::fromUtf8("color: #91818A; background-color: none;"));
+        labelPDFStatus->setStyleSheet(QString::fromUtf8("color: #211726;\n"
+"padding-right: 20px;\n"
+"background-color: none;"));
         labelPDFStatus->setAlignment(Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter);
         labelPDFStatus->setWordWrap(true);
         labelPDFStatus->setMargin(0);
@@ -211,7 +214,7 @@ public:
         font4.setBold(true);
         btnGenerateQuiz->setFont(font4);
         btnGenerateQuiz->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-        btnGenerateQuiz->setStyleSheet(QString::fromUtf8("background-color: #91818A; color: #FAF6F0;"));
+        btnGenerateQuiz->setStyleSheet(QString::fromUtf8("background-color: #211726; color: #FAF6F0;"));
 
         horizontalLayout_2->addWidget(btnGenerateQuiz);
 
@@ -237,7 +240,7 @@ public:
         font5.setBold(true);
         btnStartQuiz->setFont(font5);
         btnStartQuiz->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-        btnStartQuiz->setStyleSheet(QString::fromUtf8("background-color: #00BBF9;\n"
+        btnStartQuiz->setStyleSheet(QString::fromUtf8("background-color: #7865c8;\n"
 "color: #FAF6F0;"));
         btnStartQuiz->setAutoRepeat(false);
 

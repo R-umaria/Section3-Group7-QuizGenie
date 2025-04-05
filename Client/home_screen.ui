@@ -23,7 +23,7 @@
    <number>-2</number>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #FAF6F0;</string>
+   <string notr="true">background-color: #e8dfec;</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_4">
    <item alignment="Qt::AlignmentFlag::AlignTop">
@@ -184,7 +184,7 @@ border-radius: 20px;</string>
          <bool>false</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgba(145, 129, 138, 0.1);
+         <string notr="true">background-color: rgba(255, 255, 255, 1);
 border-radius: 12px;</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
@@ -249,7 +249,7 @@ border-radius: 12px;</string>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">color: #91818A; background-color: none;</string>
+              <string notr="true">color: #7865c8; background-color: none;</string>
              </property>
              <property name="lineWidth">
               <number>0</number>
@@ -302,8 +302,9 @@ border-radius: 12px;</string>
              </property>
              <property name="styleSheet">
               <string notr="true">padding: 10px; 
-background-color: #91818A;
-color: #FAF6F0;</string>
+color: #211726;
+border: 2px solid #211726;
+border-radius: 8px;</string>
              </property>
              <property name="text">
               <string>Upload PDF</string>
@@ -347,7 +348,9 @@ color: #FAF6F0;</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">color: #91818A; background-color: none;</string>
+            <string notr="true">color: #211726;
+padding-right: 20px;
+background-color: none;</string>
            </property>
            <property name="text">
             <string>No file selected!</string>
@@ -413,7 +416,7 @@ color: #FAF6F0;</string>
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: #91818A; color: #FAF6F0;</string>
+              <string notr="true">background-color: #211726; color: #FAF6F0;</string>
              </property>
              <property name="text">
               <string>Generate Quiz</string>
@@ -481,7 +484,7 @@ color: #FAF6F0;</string>
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: #00BBF9;
+              <string notr="true">background-color: #7865c8;
 color: #FAF6F0;</string>
              </property>
              <property name="text">

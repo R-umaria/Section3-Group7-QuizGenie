@@ -2,6 +2,7 @@
 #include "ui_home_screen.h"
 #include "quiz_screen.h"
 #include <QDir>
+#include <QGraphicsDropShadowEffect>
 
 HomePage::HomePage(QWidget *parent, QString userName) :
     QWidget(parent),
@@ -17,6 +18,15 @@ HomePage::HomePage(QWidget *parent, QString userName) :
 
     // Set user's name from login
     ui->labelUserName->setText("Welcome, " + userName);
+
+    // Apply Drop Shadow Effect to the Frames (body_container only)
+    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect(this);
+    shadowEffect->setBlurRadius(30);
+    shadowEffect->setXOffset(0);
+    shadowEffect->setYOffset(0);
+    shadowEffect->setColor(QColor(120, 101, 200, 60));
+
+    ui->btnGenerateQuiz->setGraphicsEffect(shadowEffect);  // Apply shadow to the Login Form
 
     // Connect button signals
     connect(ui->btnUploadPDF, &QPushButton::clicked, this, &HomePage::on_btnUploadPDF_clicked);
