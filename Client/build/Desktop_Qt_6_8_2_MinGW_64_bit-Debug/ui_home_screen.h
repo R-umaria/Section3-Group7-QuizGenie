@@ -28,7 +28,6 @@ public:
     QVBoxLayout *verticalLayout_3;
     QWidget *top_menubar;
     QHBoxLayout *horizontalLayout_3;
-    QLabel *logo_horizontal;
     QLabel *labelUserName;
     QWidget *main_upload_widget;
     QVBoxLayout *verticalLayout;
@@ -64,6 +63,7 @@ public:
         centralvertical->setSizePolicy(sizePolicy1);
         centralvertical->setMinimumSize(QSize(1040, 500));
         centralvertical->setMaximumSize(QSize(1080, 600));
+        centralvertical->setStyleSheet(QString::fromUtf8(""));
         verticalLayout_3 = new QVBoxLayout(centralvertical);
         verticalLayout_3->setSpacing(0);
         verticalLayout_3->setObjectName("verticalLayout_3");
@@ -78,41 +78,31 @@ public:
         top_menubar->setSizePolicy(sizePolicy2);
         top_menubar->setMinimumSize(QSize(1000, 40));
         top_menubar->setMaximumSize(QSize(1080, 112));
+        top_menubar->setStyleSheet(QString::fromUtf8("background-color: rgba(120, 101, 200, 100);\n"
+"border-radius: 29px;"));
         horizontalLayout_3 = new QHBoxLayout(top_menubar);
         horizontalLayout_3->setSpacing(200);
         horizontalLayout_3->setObjectName("horizontalLayout_3");
-        logo_horizontal = new QLabel(top_menubar);
-        logo_horizontal->setObjectName("logo_horizontal");
-        QSizePolicy sizePolicy3(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(logo_horizontal->sizePolicy().hasHeightForWidth());
-        logo_horizontal->setSizePolicy(sizePolicy3);
-        logo_horizontal->setMinimumSize(QSize(400, 112));
-        logo_horizontal->setMaximumSize(QSize(400, 112));
-        logo_horizontal->setStyleSheet(QString::fromUtf8("border-radius: 12px;"));
-        logo_horizontal->setScaledContents(true);
-
-        horizontalLayout_3->addWidget(logo_horizontal, 0, Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter);
-
         labelUserName = new QLabel(top_menubar);
         labelUserName->setObjectName("labelUserName");
+        QSizePolicy sizePolicy3(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(labelUserName->sizePolicy().hasHeightForWidth());
         labelUserName->setSizePolicy(sizePolicy3);
         labelUserName->setMinimumSize(QSize(200, 40));
-        labelUserName->setMaximumSize(QSize(200, 40));
+        labelUserName->setMaximumSize(QSize(400, 40));
         QFont font;
-        font.setPointSize(11);
+        font.setPointSize(20);
         font.setBold(true);
         labelUserName->setFont(font);
         labelUserName->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
-        labelUserName->setStyleSheet(QString::fromUtf8("padding: 10px;\n"
-"background-color: #91818A;\n"
-"color: #FAF6F0;\n"
-"border-radius: 20px;"));
+        labelUserName->setStyleSheet(QString::fromUtf8("padding: 5px;\n"
+"color: #ffffff;\n"
+"background-color: rgba(0, 0,0,0);"));
         labelUserName->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
 
-        horizontalLayout_3->addWidget(labelUserName, 0, Qt::AlignmentFlag::AlignRight);
+        horizontalLayout_3->addWidget(labelUserName, 0, Qt::AlignmentFlag::AlignLeft);
 
 
         verticalLayout_3->addWidget(top_menubar, 0, Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop);
@@ -137,8 +127,11 @@ public:
         horizontalLayout->setContentsMargins(30, 30, 30, 40);
         label_2 = new QLabel(main_upload_widget);
         label_2->setObjectName("label_2");
-        sizePolicy3.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy4(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy4);
         label_2->setMinimumSize(QSize(400, 100));
         label_2->setMaximumSize(QSize(400, 100));
         QFont font1;
@@ -154,8 +147,8 @@ public:
 
         btnUploadPDF = new QPushButton(main_upload_widget);
         btnUploadPDF->setObjectName("btnUploadPDF");
-        sizePolicy3.setHeightForWidth(btnUploadPDF->sizePolicy().hasHeightForWidth());
-        btnUploadPDF->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(btnUploadPDF->sizePolicy().hasHeightForWidth());
+        btnUploadPDF->setSizePolicy(sizePolicy4);
         btnUploadPDF->setMinimumSize(QSize(150, 60));
         btnUploadPDF->setMaximumSize(QSize(180, 60));
         QFont font2;
@@ -179,11 +172,11 @@ public:
 
         labelPDFStatus = new QLabel(main_upload_widget);
         labelPDFStatus->setObjectName("labelPDFStatus");
-        QSizePolicy sizePolicy4(QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Minimum);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(labelPDFStatus->sizePolicy().hasHeightForWidth());
-        labelPDFStatus->setSizePolicy(sizePolicy4);
+        QSizePolicy sizePolicy5(QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Minimum);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(labelPDFStatus->sizePolicy().hasHeightForWidth());
+        labelPDFStatus->setSizePolicy(sizePolicy5);
         labelPDFStatus->setMinimumSize(QSize(400, 28));
         labelPDFStatus->setMaximumSize(QSize(400, 28));
         QFont font3;
@@ -205,8 +198,8 @@ public:
         horizontalLayout_2->setContentsMargins(30, 10, 30, 30);
         btnGenerateQuiz = new QPushButton(main_upload_widget);
         btnGenerateQuiz->setObjectName("btnGenerateQuiz");
-        sizePolicy3.setHeightForWidth(btnGenerateQuiz->sizePolicy().hasHeightForWidth());
-        btnGenerateQuiz->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(btnGenerateQuiz->sizePolicy().hasHeightForWidth());
+        btnGenerateQuiz->setSizePolicy(sizePolicy4);
         btnGenerateQuiz->setMinimumSize(QSize(180, 50));
         btnGenerateQuiz->setMaximumSize(QSize(180, 50));
         QFont font4;
@@ -220,8 +213,8 @@ public:
 
         labelLoading = new QLabel(main_upload_widget);
         labelLoading->setObjectName("labelLoading");
-        sizePolicy3.setHeightForWidth(labelLoading->sizePolicy().hasHeightForWidth());
-        labelLoading->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(labelLoading->sizePolicy().hasHeightForWidth());
+        labelLoading->setSizePolicy(sizePolicy4);
         labelLoading->setMinimumSize(QSize(50, 50));
         labelLoading->setMaximumSize(QSize(50, 50));
         labelLoading->setStyleSheet(QString::fromUtf8("background-color: none;"));
@@ -231,8 +224,8 @@ public:
         btnStartQuiz = new QPushButton(main_upload_widget);
         btnStartQuiz->setObjectName("btnStartQuiz");
         btnStartQuiz->setEnabled(false);
-        sizePolicy3.setHeightForWidth(btnStartQuiz->sizePolicy().hasHeightForWidth());
-        btnStartQuiz->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(btnStartQuiz->sizePolicy().hasHeightForWidth());
+        btnStartQuiz->setSizePolicy(sizePolicy4);
         btnStartQuiz->setMinimumSize(QSize(160, 50));
         btnStartQuiz->setMaximumSize(QSize(160, 50));
         QFont font5;
@@ -264,7 +257,6 @@ public:
     void retranslateUi(QWidget *HomePage)
     {
         HomePage->setWindowTitle(QCoreApplication::translate("HomePage", "Form", nullptr));
-        logo_horizontal->setText(QString());
         labelUserName->setText(QCoreApplication::translate("HomePage", "Hi, John Doe!", nullptr));
         label_2->setText(QCoreApplication::translate("HomePage", "To begin the Quiz, upload pdf of the course material:", nullptr));
         btnUploadPDF->setText(QCoreApplication::translate("HomePage", "Upload PDF", nullptr));

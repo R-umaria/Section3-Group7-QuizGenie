@@ -13,20 +13,32 @@ HomePage::HomePage(QWidget *parent, QString userName) :
 {
     ui->setupUi(this);
 
-    QPixmap pix(":/assets/logo_horizontal.png");
-    ui->logo_horizontal->setPixmap(pix.scaled(ui->logo_horizontal->width(), ui->logo_horizontal->height(), Qt::KeepAspectRatio));
-
     // Set user's name from login
-    ui->labelUserName->setText("Welcome, " + userName);
+    ui->labelUserName->setText("Welcome, " + userName + "!");
 
     // Apply Drop Shadow Effect to the Frames (body_container only)
-    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect(this);
-    shadowEffect->setBlurRadius(30);
-    shadowEffect->setXOffset(0);
-    shadowEffect->setYOffset(0);
-    shadowEffect->setColor(QColor(120, 101, 200, 60));
+    QGraphicsDropShadowEffect *shadowEffect1 = new QGraphicsDropShadowEffect(this);
+    shadowEffect1->setBlurRadius(30);
+    shadowEffect1->setXOffset(0);
+    shadowEffect1->setYOffset(0);
+    shadowEffect1->setColor(QColor(120, 101, 200, 200));
 
-    ui->btnGenerateQuiz->setGraphicsEffect(shadowEffect);  // Apply shadow to the Login Form
+    // Apply Drop Shadow Effect to the Frames (body_container only)
+    QGraphicsDropShadowEffect *shadowEffect2 = new QGraphicsDropShadowEffect(this);
+    shadowEffect2->setBlurRadius(30);
+    shadowEffect2->setXOffset(0);
+    shadowEffect2->setYOffset(0);
+    shadowEffect2->setColor(QColor(120, 101, 200, 200));
+
+    QGraphicsDropShadowEffect *shadowEffect3 = new QGraphicsDropShadowEffect(this);
+    shadowEffect3->setBlurRadius(30);
+    shadowEffect3->setXOffset(0);
+    shadowEffect3->setYOffset(0);
+    shadowEffect3->setColor(QColor(120, 101, 200, 200));
+
+    ui->btnGenerateQuiz->setGraphicsEffect(shadowEffect1);  // Apply shadow efect
+    ui->btnStartQuiz->setGraphicsEffect(shadowEffect2);
+    ui->top_menubar->setGraphicsEffect(shadowEffect3);
 
     // Connect button signals
     connect(ui->btnUploadPDF, &QPushButton::clicked, this, &HomePage::on_btnUploadPDF_clicked);

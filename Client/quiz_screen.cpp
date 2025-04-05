@@ -10,8 +10,6 @@ QuizScreen::QuizScreen(QWidget *parent, QString userName) :
     userName(userName)
 {
     ui->setupUi(this);
-    QPixmap pix(":/assets/logo_horizontal.png");
-    ui->logo_horizontal->setPixmap(pix.scaled(ui->logo_horizontal->width(), ui->logo_horizontal->height(), Qt::KeepAspectRatio));
 
     // Set user's name from login
     ui->labelUserName->setText("Welcome, " + userName);
@@ -27,14 +25,15 @@ QuizScreen::QuizScreen(QWidget *parent, QString userName) :
 
     // Apply styling to submit button
     ui->submitButton->setStyleSheet("QPushButton {"
-                                    "background-color: #007bff;"
+                                    "border: solid 5px #211726;"
+                                    "background-color: #e8dfec;"
                                     "color: white;"
                                     "border-radius: 8px;"
                                     "padding: 8px 16px;"
                                     "font-size: 14px;"
                                     "}"
                                     "QPushButton:hover {"
-                                    "background-color: #0056b3;"
+                                    "background-color: #211726;"
                                     "}");
 }
 
