@@ -1,5 +1,5 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "login_screen.h"
+#include "ui_login_screen.h"
 #include "QPixmap"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

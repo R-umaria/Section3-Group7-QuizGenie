@@ -1,5 +1,5 @@
-#ifndef HOMEPAGE_H
-#define HOMEPAGE_H
+#ifndef HOME_SCREEN_H
+#define HOME_SCREEN_H
 
 #include <QWidget>
 #include <QFileDialog>
@@ -7,7 +7,6 @@
 #include <QMessageBox>
 #include <QMovie>
 #include <QTimer>
-#include "quizscreen.h"
 
 
 namespace Ui {
@@ -36,4 +35,4 @@ private:
     QString userName;
 };
 
-#endif // HOMEPAGE_H
+#endif // HOME_SCREEN_H

@@ -1,5 +1,6 @@
-#include "homepage.h"
-#include "ui_homepage.h"
+#include "home_screen.h"
+#include "ui_home_screen.h"
+#include "quiz_screen.h"
 #include <QDir>
 
 HomePage::HomePage(QWidget *parent, QString userName) :
@@ -115,9 +116,12 @@ void HomePage::checkForCSVFile()
 void HomePage::on_btnStartQuiz_clicked()
 {
     qDebug() << "Starting QuizScreen";
-    QuizScreen *quizScreen = new QuizScreen(this, userName);
+
+    // Assuming you have a pointer to your main window or a layout to replace.
+    QuizScreen *quizScreen = new QuizScreen();
+    quizScreen->loadQuestionsFromCSV(QDir::currentPath() + "/UploadedPDFs/mcq_output.csv");
     quizScreen->show();
-    qDebug() << "QuizScreen shown";
-    this->hide(); // Use hide() instead of close()
-    qDebug() << "HomePage hidden";
+
+    this->close(); // Hide the home screen if necessary
 }
+

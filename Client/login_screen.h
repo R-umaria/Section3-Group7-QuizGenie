@@ -1,9 +1,9 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef LOGIN_SCREEN_H
+#define LOGIN_SCREEN_H
 
 #include <QMainWindow>
 #include <QMessageBox>
-#include "homepage.h"
+#include "home_screen.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,4 +25,4 @@ private slots:
 private:
     Ui::MainWindow *ui;
 };
-#endif // MAINWINDOW_H
+#endif // LOGIN_SCREEN_H
