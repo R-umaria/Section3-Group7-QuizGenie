@@ -113,7 +113,7 @@ public:
         QFont font1;
         font1.setPointSize(12);
         User_name_txtfield->setFont(font1);
-        User_name_txtfield->setStyleSheet(QString::fromUtf8("background-color: #FAF6F0;\n"
+        User_name_txtfield->setStyleSheet(QString::fromUtf8("background-color: #eeeae5;\n"
 "border-radius: 8px;\n"
 "padding: 10px;"));
         User_name_txtfield->setFrame(false);
@@ -128,7 +128,7 @@ public:
         Password_txtfield->setMinimumSize(QSize(280, 38));
         Password_txtfield->setMaximumSize(QSize(280, 40));
         Password_txtfield->setFont(font1);
-        Password_txtfield->setStyleSheet(QString::fromUtf8("background-color: #FAF6F0;\n"
+        Password_txtfield->setStyleSheet(QString::fromUtf8("background-color: #eeeae5;\n"
 "border-radius: 8px;\n"
 "padding: 10px;"));
         Password_txtfield->setEchoMode(QLineEdit::EchoMode::Password);

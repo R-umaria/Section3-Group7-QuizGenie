@@ -175,7 +175,7 @@ border-radius: 14px;</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: #FAF6F0;
+            <string notr="true">background-color: #eeeae5;
 border-radius: 8px;
 padding: 10px;</string>
            </property>
@@ -216,7 +216,7 @@ padding: 10px;</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: #FAF6F0;
+            <string notr="true">background-color: #eeeae5;
 border-radius: 8px;
 padding: 10px;</string>
            </property>

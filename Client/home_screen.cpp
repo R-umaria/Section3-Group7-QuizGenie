@@ -117,11 +117,17 @@ void HomePage::on_btnStartQuiz_clicked()
 {
     qDebug() << "Starting QuizScreen";
 
-    // Assuming you have a pointer to your main window or a layout to replace.
-    QuizScreen *quizScreen = new QuizScreen();
-    quizScreen->loadQuestionsFromCSV(QDir::currentPath() + "/UploadedPDFs/mcq_output.csv");
-    quizScreen->show();
+    // Avoid creating multiple instances
+    static QuizScreen *quizScreen = nullptr;
+
+    if (quizScreen == nullptr) {
+        quizScreen = new QuizScreen(nullptr, "Admin");
+        quizScreen->loadQuestionsFromCSV(QDir::currentPath() + "/UploadedPDFs/mcq_output.csv");
+        quizScreen->show();
+    } else {
+        quizScreen->raise();
+        quizScreen->activateWindow();
+    }
 
     this->close(); // Hide the home screen if necessary
 }
-

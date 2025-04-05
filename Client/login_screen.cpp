@@ -29,7 +29,7 @@ void MainWindow::on_loginButton_clicked()
         QMessageBox::information(this, "Login", "Login successful!");
 
         // Open HomePage and pass the user's name
-        HomePage *homePage = new HomePage(nullptr, "Admin User");
+        HomePage *homePage = new HomePage(nullptr, "Admin");
         homePage->show();
         this->close();  // Close login window
     } else {
