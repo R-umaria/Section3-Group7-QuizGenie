@@ -46,6 +46,9 @@
        <height>600</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="spacing">
        <number>0</number>
@@ -79,45 +82,18 @@
           <height>112</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgba(120, 101, 200, 100);
+border-radius: 29px;</string>
+        </property>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <property name="spacing">
           <number>200</number>
          </property>
-         <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
-          <widget class="QLabel" name="logo_horizontal">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>400</width>
-             <height>112</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>400</width>
-             <height>112</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">border-radius: 12px;</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="scaledContents">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item alignment="Qt::AlignmentFlag::AlignRight">
+         <item alignment="Qt::AlignmentFlag::AlignLeft">
           <widget class="QLabel" name="labelUserName">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -130,13 +106,13 @@
            </property>
            <property name="maximumSize">
             <size>
-             <width>200</width>
+             <width>400</width>
              <height>40</height>
             </size>
            </property>
            <property name="font">
             <font>
-             <pointsize>11</pointsize>
+             <pointsize>20</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -144,10 +120,9 @@
             <enum>Qt::LayoutDirection::LeftToRight</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">padding: 10px;
-background-color: #91818A;
-color: #FAF6F0;
-border-radius: 20px;</string>
+            <string notr="true">padding: 5px;
+color: #ffffff;
+background-color: rgba(0, 0,0,0);</string>
            </property>
            <property name="text">
             <string>Hi, John Doe!</string>
