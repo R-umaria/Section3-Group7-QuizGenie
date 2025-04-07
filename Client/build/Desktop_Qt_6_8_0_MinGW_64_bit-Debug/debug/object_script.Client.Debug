@@ -1,10 +1,10 @@
-debug/homepage.o
+debug/home_screen.o
+debug/login_screen.o
 debug/main.o
-debug/mainwindow.o
-debug/quizscreen.o
+debug/quiz_screen.o
 debug/client.o
 debug/qrc_resources.o
-debug/moc_homepage.o
-debug/moc_mainwindow.o
-debug/moc_quizscreen.o
+debug/moc_home_screen.o
+debug/moc_login_screen.o
+debug/moc_quiz_screen.o
 debug/moc_client.o

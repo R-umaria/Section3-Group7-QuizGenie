@@ -124,7 +124,7 @@ void Client::receiveCSV()
     QString csvFolder = QDir::currentPath() + "/UploadedPDFs/";
     QDir().mkpath(csvFolder);
         //File name
-    QString fileName = "quizQuestions.csv";
+    QString fileName = "mcq_output.csv";
     QString newFilePath = csvFolder + fileName;
 
     //Remove file if already exists

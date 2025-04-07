@@ -19,22 +19,22 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    homepage.cpp \
+    home_screen.cpp \
+    login_screen.cpp \
     main.cpp \
-    mainwindow.cpp \
-    quizscreen.cpp \
+    quiz_screen.cpp \
     client.cpp
 
 HEADERS += \
-    homepage.h \
-    mainwindow.h \
-    quizscreen.h \
-    client.h \
-    ui_mainwindow.h
+    home_screen.h \
+    login_screen.h \
+    quiz_screen.h \
+    client.h
 
-FORMS +=  \
-    homepage.ui \
-    mainwindow.ui
+FORMS += \
+    home_screen.ui \
+    login_screen.ui \
+    quiz_screen.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -46,3 +46,6 @@ TARGET = Client
 
 RESOURCES += \
     resources.qrc
+
+# Ensure the CSV file is included in the project
+DISTFILES += UploadedPDFs/mcq_output.csv

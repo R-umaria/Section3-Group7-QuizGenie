@@ -1,6 +1,5 @@
-#include "mainwindow.h"
-
 #include <QApplication>
+#include "login_screen.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,6 +9,8 @@ int main(int argc, char *argv[])
     client->connectToServer();
 
     MainWindow w(client);
+    //MainWindow w;
+    w.setAttribute(Qt::WA_TranslucentBackground);
     w.show();
     int result = a.exec();
 
