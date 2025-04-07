@@ -26,6 +26,9 @@ void Client::connectToServer() {
         //remove after testing
         //exit(1);
     }
+    else {
+        QMessageBox::information(nullptr, "Connection Successful", "Connected to Server!");
+    }
 }
 
 bool Client::authenticate(const QString &username, const QString &password)
