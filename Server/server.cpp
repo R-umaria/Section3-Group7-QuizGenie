@@ -1,76 +1,134 @@
-#include <iostream>
-#include <fstream>
-#include <QTcpServer>
-#include <QTcpSocket>
-#include <QProcess>
-#include <QDir>
+#include "server.h"
 
-#define PORT 12345
-
-class Server : public QTcpServer {
-    Q_OBJECT
-public:
-    Server(QObject *parent = nullptr) : QTcpServer(parent) {
-        if (this->listen(QHostAddress::Any, PORT)) {
-            std::cout << "Server started. Listening on port " << PORT << std::endl;
-        } else {
-            std::cerr << "Server failed to start!" << std::endl;
+void Server::loadCorrectAnswers(Session& session, const std::string& filePath) {
+    std::ifstream file(filePath);
+    std::string line;
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
+        std::string question, answer;
+        if (std::getline(ss, question, ',') && std::getline(ss, answer)) {
+            session.correctAnswers.push_back(answer);
         }
     }
+}
 
-protected:
-    void incomingConnection(qintptr socketDescriptor) override {
-        QTcpSocket *socket = new QTcpSocket(this);
-        socket->setSocketDescriptor(socketDescriptor);
-        connect(socket, &QTcpSocket::readyRead, this, &Server::receiveFile);
-        connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
-    }
+void Server::handleClientMessage(int clientSocket, const std::string& message) {
+    Session& session = sessions[clientSocket];
 
-private slots:
-    void receiveFile() {
-        QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
-        if (!socket) return;
-
-        QByteArray data = socket->readAll();
-        QString inputDir = "pdf_mcq_generator/input/";
-        QDir().mkpath(inputDir);
-        QString filePath = inputDir + "received.pdf";
-
-        QFile file(filePath);
-        if (file.open(QIODevice::WriteOnly)) {
-            file.write(data);
-            file.close();
-            std::cout << "PDF file received and saved: " << filePath.toStdString() << std::endl;
+    if (message.rfind("AUTH", 0) == 0) {
+        size_t pos1 = message.find(',');
+        size_t pos2 = message.find(',', pos1 + 1);
+        size_t pos3 = message.find(',', pos2 + 1);
+        if (pos3 != std::string::npos) {
+            session.username = message.substr(pos2 + 1);
+            session.state = IN_PROGRESS;
+            loadCorrectAnswers(session, "pdf_mcq_generator/output/mcq_output.csv");
+            std::string successMsg = "Authentication successful\n";
+            send(clientSocket, successMsg.c_str(), successMsg.size(), 0);
         } else {
-            std::cerr << "Failed to save PDF file!" << std::endl;
+            std::string errorMsg = "Invalid authentication packet.\n";
+            send(clientSocket, errorMsg.c_str(), errorMsg.size(), 0);
+        }
+    } else if (session.state == IN_PROGRESS && message.rfind("ANSWER", 0) == 0) {
+        size_t comma = message.find(',');
+        if (comma == std::string::npos) {
+            std::string errorMsg = "Invalid answer format.\n";
+            send(clientSocket, errorMsg.c_str(), errorMsg.size(), 0);
             return;
         }
 
-        // Run Python script to process the file
-        QProcess process;
-        process.start("python3", QStringList() << "pdf_mcq_generator/main.py" << filePath);
-        process.waitForFinished();
+        std::string userAnswer = message.substr(comma + 1);
+        std::transform(userAnswer.begin(), userAnswer.end(), userAnswer.begin(), ::toupper);
 
-        // Path to the generated CSV
-        QString csvFilePath = "pdf_mcq_generator/output/mcq_output.csv";
-        QFile csvFile(csvFilePath);
-        if (csvFile.open(QIODevice::ReadOnly)) {
-            QByteArray csvData = csvFile.readAll();
-            csvFile.close();
-            socket->write(csvData);
-            socket->flush();
-            socket->waitForBytesWritten();
-            std::cout << "CSV file sent to client: " << csvFilePath.toStdString() << std::endl;
-        } else {
-            std::cerr << "Failed to read CSV file!" << std::endl;
+        int index = session.currentQuestionIndex;
+        if (index < session.correctAnswers.size()) {
+            std::string correct = session.correctAnswers[index];
+            std::transform(correct.begin(), correct.end(), correct.begin(), ::toupper);
+            if (userAnswer == correct) {
+                session.score++;
+                std::string msg = "Correct!\n";
+                send(clientSocket, msg.c_str(), msg.size(), 0);
+            } else {
+                std::string msg = "Wrong! Correct answer was: " + correct + "\n";
+                send(clientSocket, msg.c_str(), msg.size(), 0);
+            }
+            session.currentQuestionIndex++;
         }
 
-        socket->close();
+        if (session.currentQuestionIndex >= session.correctAnswers.size()) {
+            session.state = FINISHED;
+            std::ostringstream result;
+            result << "Quiz finished. Your score: " << session.score << "/" << session.correctAnswers.size() << "\n";
+            send(clientSocket, result.str().c_str(), result.str().size(), 0);
+        } else {
+            std::string msg = "Next question...\n";
+            send(clientSocket, msg.c_str(), msg.size(), 0);
+        }
+    } else {
+        std::string msg = "Invalid or unexpected input.\n";
+        send(clientSocket, msg.c_str(), msg.size(), 0);
     }
-};
+}
 
-int main(int argc, char *argv[]) {
-    QCoreApplication app(argc, argv);
-    Server server;
-    return app.exec();
+void Server::run() {
+    serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if (serverSocket < 0) {
+        perror("Socket creation failed");
+        exit(EXIT_FAILURE);
+    }
+
+    sockaddr_in serverAddr{};
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_addr.s_addr = INADDR_ANY;
+    serverAddr.sin_port = htons(PORT);
+
+    if (bind(serverSocket, (sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {
+        perror("Bind failed");
+        exit(EXIT_FAILURE);
+    }
+
+    if (listen(serverSocket, SOMAXCONN) < 0) {
+        perror("Listen failed");
+        exit(EXIT_FAILURE);
+    }
+
+    std::cout << "Server started on port " << PORT << std::endl;
+
+    FD_ZERO(&masterSet);
+    FD_SET(serverSocket, &masterSet);
+
+    while (true) {
+        fd_set readSet = masterSet;
+        if (select(FD_SETSIZE, &readSet, nullptr, nullptr, nullptr) < 0) {
+            perror("select error");
+            break;
+        }
+
+        for (int i = 0; i < FD_SETSIZE; ++i) {
+            if (FD_ISSET(i, &readSet)) {
+                if (i == serverSocket) {
+                    int clientSocket = accept(serverSocket, nullptr, nullptr);
+                    if (clientSocket >= 0) {
+                        FD_SET(clientSocket, &masterSet);
+                        sessions[clientSocket] = Session();
+                        std::cout << "New client connected.\n";
+                    }
+                } else {
+                    char buffer[BUFFER_SIZE] = {0};
+                    int bytesReceived = recv(i, buffer, BUFFER_SIZE, 0);
+                    if (bytesReceived <= 0) {
+                        close(i);
+                        FD_CLR(i, &masterSet);
+                        sessions.erase(i);
+                        std::cout << "Client disconnected.\n";
+                    } else {
+                        std::string message(buffer, bytesReceived);
+                        handleClientMessage(i, message);
+                    }
+                }
+            }
+        }
+    }
+
+    close(serverSocket);
 }
