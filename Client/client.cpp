@@ -174,6 +174,22 @@ void Client::receiveCSV()
     } else {
         QMessageBox::critical(nullptr, "File Error", "Failed to save CSV file.");
     }
+
+    //check to make sure csv received correctly
+    //   ->can delete after debugging
+    QFile printFile(newFilePath);
+    if (printFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&printFile);
+        qDebug() << "=== CSV File Contents ===";
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            qDebug().noquote() << line;
+        }
+        qDebug() << "==========================";
+        printFile.close();
+    } else {
+        qDebug() << "Failed to open CSV file for reading.";
+    }
 }
 
 bool Client::isAuthenticated() const
