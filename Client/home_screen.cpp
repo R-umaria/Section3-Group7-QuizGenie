@@ -2,7 +2,7 @@
 #include "ui_home_screen.h"
 #include "quiz_screen.h"
 #include <QDir>
-//#include <QDebug>
+#include <QDebug>
 #include <QGraphicsDropShadowEffect>
 
 HomePage::HomePage(Client *client, QWidget *parent, QString userName) :
@@ -101,10 +101,6 @@ void HomePage::on_btnGenerateQuiz_clicked()
         QMessageBox::warning(this, "No PDF Selected", "Please upload a PDF before generating the quiz.");
         return;
     }
-
-    //Send the pdf to the server
-    client->sendPDF(pdfFilePath);
-
     // Show loading spinner
     ui->labelLoading->setVisible(true);
     loadingMovie->start();
@@ -117,8 +113,13 @@ void HomePage::on_btnGenerateQuiz_clicked()
     // Simulate sending PDF to server (Backend handles this)
     QMessageBox::information(this, "Quiz Generation", "The quiz is being generated. Please wait...");
 
+    //Send the pdf to the server
+    client->sendPDF(pdfFilePath);
+    qDebug() << "packet sent to server";
+
     //Receive CSV response from server
     client->receiveCSV();
+    qDebug() <<"Received csv from server";
 
     // Start checking for CSV every 3 seconds
     csvCheckTimer->start(3000);

@@ -45,9 +45,9 @@ bool Client::authenticate(const QString &username, const QString &password)
 
     //Create packet
     packet.append(packetType);
-    packet.append(",");
+    packet.append("|");
     packet.append(dataSizeStr);
-    packet.append(",");
+    packet.append("|");
     packet.append(data);
 
     //Send packet
@@ -84,38 +84,67 @@ void Client::sendPDF(const QString &pdfFilePath)
         return;
     }
 
-    //Set up packet
-    QByteArray packet;
-    QByteArray packetType = "PDF";
+    //Read file into memory
     QByteArray fileData = file.readAll();
     qint64 dataSize = static_cast<qint64>(fileData.size());
     QByteArray dataSizeStr = QByteArray::number(dataSize);
 
-    //Create packet
+    //Create packet header
+    QByteArray packet;
+    QByteArray packetType = "PDF";
     packet.append(packetType);
-    packet.append(",");
+    packet.append("|");
     packet.append(dataSizeStr);
-    packet.append(",");
-    packet.append(fileData);
+    packet.append("|");
+    //packet.append(fileData);
 
-    //Send packet
+    //Send packet header
     socket->write(packet);
-
     if (!socket->waitForBytesWritten()) {
         QMessageBox::critical(nullptr, "Send Error", "Error sending file to the server!");
+    }
+
+    //send file in chunks
+    const int CHUNK_SIZE = 1024;
+    qint64 totalSent = 0;
+    while(totalSent < dataSize) {
+        QByteArray chunk = fileData.mid(totalSent, CHUNK_SIZE);
+        int bytesSent = socket->write(chunk);
+        if(bytesSent==-1) {
+            QMessageBox::critical(nullptr, "Send Error", "Erro sending file chunk to the server!");
+            return;
+        }
+        totalSent +=bytesSent;
+
+        if (!socket->waitForBytesWritten()) {
+            QMessageBox::critical(nullptr, "Send Error", "Error during chunk transmission!");
+        }
+    }
+
+    if (totalSent != dataSize) {
+        QMessageBox::critical(nullptr, "Send Error", "Failed to send complete file.");
+
+        //QMessageBox::information(nullptr, "Success", "PDF file successfully sent to the server!");
     }
 }
 
 void Client::receiveCSV()
 {
     //Wait for response
+    qDebug() << "attempting to wait for ready read";
     if (!socket->waitForReadyRead()) {
         QMessageBox::critical(nullptr, "Read Error", "Couldn't receive CSV file.");
+        qDebug() <<"NO CSV";
         return;
     }
 
+    qDebug() <<"Attempting to read file from server";
     //Read file data from server
-    QByteArray fileData = socket->readAll();
+    QByteArray fileData;
+    while(socket->bytesAvailable() > 0) {
+        QByteArray chunk = socket->readAll();
+        fileData.append(chunk);
+    }
 
     if(fileData.isEmpty()) {
         QMessageBox::critical(nullptr, "No Data", "No CSV file received from the server.");
@@ -126,6 +155,7 @@ void Client::receiveCSV()
         //Folder
     QString csvFolder = QDir::currentPath() + "/UploadedPDFs/";
     QDir().mkpath(csvFolder);
+
         //File name
     QString fileName = "mcq_output.csv";
     QString newFilePath = csvFolder + fileName;
@@ -140,6 +170,7 @@ void Client::receiveCSV()
     if(file.open(QIODevice::WriteOnly)) {
         file.write(fileData);
         file.close();
+        qDebug() <<"CSV file saved successfully";
     } else {
         QMessageBox::critical(nullptr, "File Error", "Failed to save CSV file.");
     }
