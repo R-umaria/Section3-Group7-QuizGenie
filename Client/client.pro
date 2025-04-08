@@ -1,5 +1,5 @@
 QT       += core gui
-
+QT += svg
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 # You can make your code fail to compile if you use deprecated APIs.

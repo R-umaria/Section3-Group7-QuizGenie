@@ -4,6 +4,9 @@
 #include <QDir>
 #include <QDebug>
 #include <QGraphicsDropShadowEffect>
+#include <QSvgRenderer>
+#include <QPixmap>
+#include <QPainter>
 
 HomePage::HomePage(Client *client, QWidget *parent, QString userName) :
     QWidget(parent),
@@ -38,15 +41,35 @@ HomePage::HomePage(Client *client, QWidget *parent, QString userName) :
     shadowEffect3->setYOffset(0);
     shadowEffect3->setColor(QColor(120, 101, 200, 200));
 
-    ui->btnGenerateQuiz->setGraphicsEffect(shadowEffect1);  // Apply shadow efect
+    ui->btnGenerateQuiz->setGraphicsEffect(shadowEffect1);  // Apply shadow effect
+    ui->btnGenerateQuiz->setStyleSheet("QPushButton {"
+                                       "background-color: #211726;"
+                                       "color: #FAF6F0;"
+                                       "}"
+                                       "QPushButton:hover {"
+                                       "background-color: #7865c8;"
+                                       "}");
+
+    // Load and set the SVG icon
+    QSvgRenderer svgRenderer(QStringLiteral(":/assets/gemini-icon.svg"));
+    QPixmap pixmap(20, 20);
+    pixmap.fill(Qt::transparent);
+    QPainter painter(&pixmap);
+    svgRenderer.render(&painter);
+    ui->btnGenerateQuiz->setIcon(QIcon(pixmap));
+    ui->btnGenerateQuiz->setIconSize(QSize(20, 20));
+
     ui->btnStartQuiz->setGraphicsEffect(shadowEffect2);
+    ui->btnStartQuiz->setStyleSheet("QPushButton {"
+                                    "background-color: #8d7cd0;"
+                                    "color: #FAF6F0;"
+                                    "}"
+                                    "QPushButton:hover {"
+                                    "background-color: #7865c8;"
+                                    "}");
     ui->top_menubar->setGraphicsEffect(shadowEffect3);
 
-    // Connect button signals
-        //don't need to be connected, QT does it automatically
-    //connect(ui->btnUploadPDF, &QPushButton::clicked, this, &HomePage::on_btnUploadPDF_clicked);
-    //connect(ui->btnGenerateQuiz, &QPushButton::clicked, this, &HomePage::on_btnGenerateQuiz_clicked);
-    //connect(ui->btnStartQuiz, &QPushButton::clicked, this, &HomePage::on_btnStartQuiz_clicked);
+
 
     // Disable start button initially
     ui->btnStartQuiz->setEnabled(false);
@@ -91,14 +114,14 @@ void HomePage::on_btnUploadPDF_clicked()
         ui->labelPDFStatus->setText("File Uploaded: " + QFileInfo(newFilePath).fileName());
         pdfFilePath = newFilePath; // Store the PDF path
     } else {
-        QMessageBox::warning(this, "Upload Failed", "Could not save the file!");
+        showCustomMessageBox("Upload Failed", "Could not save the file!", QMessageBox::Warning);
     }
 }
 
 void HomePage::on_btnGenerateQuiz_clicked()
 {
     if (pdfFilePath.isEmpty()) {
-        QMessageBox::warning(this, "No PDF Selected", "Please upload a PDF before generating the quiz.");
+        showCustomMessageBox("No PDF Selected", "Please upload a PDF before generating the quiz.", QMessageBox::Warning);
         return;
     }
     // Show loading spinner
@@ -111,7 +134,7 @@ void HomePage::on_btnGenerateQuiz_clicked()
     ui->btnStartQuiz->setEnabled(false);
 
     // Simulate sending PDF to server (Backend handles this)
-    QMessageBox::information(this, "Quiz Generation", "The quiz is being generated. Please wait...");
+    showCustomMessageBox("Quiz Generation", "The quiz is being generated. Please wait...", QMessageBox::Information);
 
     //Send the pdf to the server
     client->sendPDF(pdfFilePath);
@@ -141,7 +164,7 @@ void HomePage::checkForCSVFile()
 
         // Enable Start button
         ui->btnStartQuiz->setEnabled(true);
-        QMessageBox::information(this, "Quiz Ready", "Quiz generated successfully! You can now start.");
+        showCustomMessageBox("Quiz Ready", "Quiz generated successfully! You can now start.", QMessageBox::Information);
     }
 }
 
@@ -162,4 +185,43 @@ void HomePage::on_btnStartQuiz_clicked()
     }
 
     this->close(); // Hide the home screen if necessary
+}
+
+void HomePage::showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon)
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(title);
+    msgBox.setText(text);
+    msgBox.setIcon(icon);
+
+    msgBox.setMinimumSize(350, 250);
+
+    msgBox.setStyleSheet("QMessageBox {"
+                         "background-color: #beb4e4;"
+                         "color: #7865c8;"
+                         "font-size: 16px;"
+                         "}"
+                         "QMessageBox QLabel {"
+                         "color: #FAF6F0;"
+                         "}"
+                         "QMessageBox QPushButton {"
+                         "background-color: #8d7cd0;"
+                         "border-radius: 5px;"
+                         "color: #FAF6F0;"
+                         "padding: 5px;"
+                         "}"
+                         "QMessageBox QPushButton:hover {"
+                         "background-color: #7865c8;"
+                         "}");
+
+    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect(&msgBox);
+    shadowEffect->setBlurRadius(20);
+    shadowEffect->setXOffset(0);
+    shadowEffect->setYOffset(0);
+    shadowEffect->setColor(QColor(0, 0, 0, 160));
+    msgBox.setGraphicsEffect(shadowEffect);
+
+    msgBox.setAttribute(Qt::WA_StyledBackground);
+
+    msgBox.exec();
 }

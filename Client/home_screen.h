@@ -27,6 +27,7 @@ private slots:
     void on_btnGenerateQuiz_clicked();
     void on_btnStartQuiz_clicked();
     void checkForCSVFile(); // Checks if CSV exists
+    void showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon);
 
 private:
     Ui::HomePage *ui;

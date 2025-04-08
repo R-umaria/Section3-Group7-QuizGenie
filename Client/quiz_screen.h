@@ -12,6 +12,8 @@
 #include <QMessageBox>
 #include <QLabel>
 
+class Client;
+
 namespace Ui {
 class QuizScreen; // Make sure this matches the name in the .ui file
 }
@@ -34,6 +36,8 @@ private:
     QVBoxLayout *questionsLayout;
     QVector<QButtonGroup*> buttonGroups;
     QString userName;
+    Client *client;
+    void showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon);
 };
 
 #endif // QUIZSCREEN_H

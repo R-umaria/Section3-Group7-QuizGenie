@@ -25,6 +25,7 @@ protected:
 
 private slots:
     void on_loginButton_clicked();  // Function to handle login
+    void showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon);
 
 private:
     Ui::MainWindow *ui;

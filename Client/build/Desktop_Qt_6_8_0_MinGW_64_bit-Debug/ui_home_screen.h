@@ -28,7 +28,7 @@ public:
     QVBoxLayout *verticalLayout_3;
     QWidget *top_menubar;
     QHBoxLayout *horizontalLayout_3;
-    QLabel *logo_horizontal;
+    QLabel *label;
     QLabel *labelUserName;
     QWidget *main_upload_widget;
     QVBoxLayout *verticalLayout;
@@ -64,6 +64,7 @@ public:
         centralvertical->setSizePolicy(sizePolicy1);
         centralvertical->setMinimumSize(QSize(1040, 500));
         centralvertical->setMaximumSize(QSize(1080, 600));
+        centralvertical->setStyleSheet(QString::fromUtf8(""));
         verticalLayout_3 = new QVBoxLayout(centralvertical);
         verticalLayout_3->setSpacing(0);
         verticalLayout_3->setObjectName("verticalLayout_3");
@@ -78,38 +79,40 @@ public:
         top_menubar->setSizePolicy(sizePolicy2);
         top_menubar->setMinimumSize(QSize(1000, 40));
         top_menubar->setMaximumSize(QSize(1080, 112));
+        top_menubar->setStyleSheet(QString::fromUtf8("background-color: rgba(120, 101, 200, 100);\n"
+"border-radius: 29px;"));
         horizontalLayout_3 = new QHBoxLayout(top_menubar);
         horizontalLayout_3->setSpacing(200);
         horizontalLayout_3->setObjectName("horizontalLayout_3");
-        logo_horizontal = new QLabel(top_menubar);
-        logo_horizontal->setObjectName("logo_horizontal");
-        QSizePolicy sizePolicy3(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(logo_horizontal->sizePolicy().hasHeightForWidth());
-        logo_horizontal->setSizePolicy(sizePolicy3);
-        logo_horizontal->setMinimumSize(QSize(400, 112));
-        logo_horizontal->setMaximumSize(QSize(400, 112));
-        logo_horizontal->setStyleSheet(QString::fromUtf8("border-radius: 12px;"));
-        logo_horizontal->setScaledContents(true);
+        label = new QLabel(top_menubar);
+        label->setObjectName("label");
+        QFont font;
+        font.setPointSize(20);
+        font.setBold(true);
+        label->setFont(font);
+        label->setStyleSheet(QString::fromUtf8("padding: 5px;\n"
+"color: #ffffff;\n"
+"background-color: rgba(0, 0,0,0);"));
 
-        horizontalLayout_3->addWidget(logo_horizontal, 0, Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter);
+        horizontalLayout_3->addWidget(label);
 
         labelUserName = new QLabel(top_menubar);
         labelUserName->setObjectName("labelUserName");
+        QSizePolicy sizePolicy3(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(labelUserName->sizePolicy().hasHeightForWidth());
         labelUserName->setSizePolicy(sizePolicy3);
         labelUserName->setMinimumSize(QSize(200, 40));
-        labelUserName->setMaximumSize(QSize(200, 40));
-        QFont font;
-        font.setPointSize(11);
-        font.setBold(true);
-        labelUserName->setFont(font);
+        labelUserName->setMaximumSize(QSize(400, 40));
+        QFont font1;
+        font1.setPointSize(16);
+        font1.setBold(true);
+        labelUserName->setFont(font1);
         labelUserName->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
-        labelUserName->setStyleSheet(QString::fromUtf8("padding: 10px;\n"
-"background-color: #91818A;\n"
-"color: #FAF6F0;\n"
-"border-radius: 20px;"));
+        labelUserName->setStyleSheet(QString::fromUtf8("padding: 5px;\n"
+"color: #ffffff;\n"
+"background-color: rgba(0, 0,0,0);"));
         labelUserName->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
 
         horizontalLayout_3->addWidget(labelUserName, 0, Qt::AlignmentFlag::AlignRight);
@@ -137,13 +140,16 @@ public:
         horizontalLayout->setContentsMargins(30, 30, 30, 40);
         label_2 = new QLabel(main_upload_widget);
         label_2->setObjectName("label_2");
-        sizePolicy3.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy4(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy4);
         label_2->setMinimumSize(QSize(400, 100));
         label_2->setMaximumSize(QSize(400, 100));
-        QFont font1;
-        font1.setPointSize(18);
-        label_2->setFont(font1);
+        QFont font2;
+        font2.setPointSize(18);
+        label_2->setFont(font2);
         label_2->setStyleSheet(QString::fromUtf8("color: #7865c8; background-color: none;"));
         label_2->setLineWidth(0);
         label_2->setScaledContents(false);
@@ -154,20 +160,21 @@ public:
 
         btnUploadPDF = new QPushButton(main_upload_widget);
         btnUploadPDF->setObjectName("btnUploadPDF");
-        sizePolicy3.setHeightForWidth(btnUploadPDF->sizePolicy().hasHeightForWidth());
-        btnUploadPDF->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(btnUploadPDF->sizePolicy().hasHeightForWidth());
+        btnUploadPDF->setSizePolicy(sizePolicy4);
         btnUploadPDF->setMinimumSize(QSize(150, 60));
         btnUploadPDF->setMaximumSize(QSize(180, 60));
-        QFont font2;
-        font2.setPointSize(14);
-        font2.setBold(false);
-        btnUploadPDF->setFont(font2);
+        QFont font3;
+        font3.setPointSize(14);
+        font3.setBold(false);
+        btnUploadPDF->setFont(font3);
         btnUploadPDF->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
         btnUploadPDF->setAutoFillBackground(false);
         btnUploadPDF->setStyleSheet(QString::fromUtf8("padding: 10px; \n"
 "color: #211726;\n"
 "border: 2px solid #211726;\n"
-"border-radius: 8px;"));
+"border-radius: 8px;\n"
+"background-color: #efecf8;"));
         QIcon icon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentNew));
         btnUploadPDF->setIcon(icon);
         btnUploadPDF->setIconSize(QSize(28, 28));
@@ -179,16 +186,16 @@ public:
 
         labelPDFStatus = new QLabel(main_upload_widget);
         labelPDFStatus->setObjectName("labelPDFStatus");
-        QSizePolicy sizePolicy4(QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Minimum);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(labelPDFStatus->sizePolicy().hasHeightForWidth());
-        labelPDFStatus->setSizePolicy(sizePolicy4);
+        QSizePolicy sizePolicy5(QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Minimum);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(labelPDFStatus->sizePolicy().hasHeightForWidth());
+        labelPDFStatus->setSizePolicy(sizePolicy5);
         labelPDFStatus->setMinimumSize(QSize(400, 28));
         labelPDFStatus->setMaximumSize(QSize(400, 28));
-        QFont font3;
-        font3.setPointSize(12);
-        labelPDFStatus->setFont(font3);
+        QFont font4;
+        font4.setPointSize(12);
+        labelPDFStatus->setFont(font4);
         labelPDFStatus->setStyleSheet(QString::fromUtf8("color: #211726;\n"
 "padding-right: 20px;\n"
 "background-color: none;"));
@@ -205,23 +212,23 @@ public:
         horizontalLayout_2->setContentsMargins(30, 10, 30, 30);
         btnGenerateQuiz = new QPushButton(main_upload_widget);
         btnGenerateQuiz->setObjectName("btnGenerateQuiz");
-        sizePolicy3.setHeightForWidth(btnGenerateQuiz->sizePolicy().hasHeightForWidth());
-        btnGenerateQuiz->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(btnGenerateQuiz->sizePolicy().hasHeightForWidth());
+        btnGenerateQuiz->setSizePolicy(sizePolicy4);
         btnGenerateQuiz->setMinimumSize(QSize(180, 50));
         btnGenerateQuiz->setMaximumSize(QSize(180, 50));
-        QFont font4;
-        font4.setPointSize(12);
-        font4.setBold(true);
-        btnGenerateQuiz->setFont(font4);
+        QFont font5;
+        font5.setPointSize(12);
+        font5.setBold(true);
+        btnGenerateQuiz->setFont(font5);
         btnGenerateQuiz->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-        btnGenerateQuiz->setStyleSheet(QString::fromUtf8("background-color: #211726; color: #FAF6F0;"));
+        btnGenerateQuiz->setStyleSheet(QString::fromUtf8(""));
 
         horizontalLayout_2->addWidget(btnGenerateQuiz);
 
         labelLoading = new QLabel(main_upload_widget);
         labelLoading->setObjectName("labelLoading");
-        sizePolicy3.setHeightForWidth(labelLoading->sizePolicy().hasHeightForWidth());
-        labelLoading->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(labelLoading->sizePolicy().hasHeightForWidth());
+        labelLoading->setSizePolicy(sizePolicy4);
         labelLoading->setMinimumSize(QSize(50, 50));
         labelLoading->setMaximumSize(QSize(50, 50));
         labelLoading->setStyleSheet(QString::fromUtf8("background-color: none;"));
@@ -231,17 +238,16 @@ public:
         btnStartQuiz = new QPushButton(main_upload_widget);
         btnStartQuiz->setObjectName("btnStartQuiz");
         btnStartQuiz->setEnabled(false);
-        sizePolicy3.setHeightForWidth(btnStartQuiz->sizePolicy().hasHeightForWidth());
-        btnStartQuiz->setSizePolicy(sizePolicy3);
+        sizePolicy4.setHeightForWidth(btnStartQuiz->sizePolicy().hasHeightForWidth());
+        btnStartQuiz->setSizePolicy(sizePolicy4);
         btnStartQuiz->setMinimumSize(QSize(160, 50));
         btnStartQuiz->setMaximumSize(QSize(160, 50));
-        QFont font5;
-        font5.setPointSize(14);
-        font5.setBold(true);
-        btnStartQuiz->setFont(font5);
+        QFont font6;
+        font6.setPointSize(14);
+        font6.setBold(true);
+        btnStartQuiz->setFont(font6);
         btnStartQuiz->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
-        btnStartQuiz->setStyleSheet(QString::fromUtf8("background-color: #7865c8;\n"
-"color: #FAF6F0;"));
+        btnStartQuiz->setStyleSheet(QString::fromUtf8(""));
         btnStartQuiz->setAutoRepeat(false);
 
         horizontalLayout_2->addWidget(btnStartQuiz, 0, Qt::AlignmentFlag::AlignRight);
@@ -264,12 +270,12 @@ public:
     void retranslateUi(QWidget *HomePage)
     {
         HomePage->setWindowTitle(QCoreApplication::translate("HomePage", "Form", nullptr));
-        logo_horizontal->setText(QString());
+        label->setText(QCoreApplication::translate("HomePage", "QuizGenie", nullptr));
         labelUserName->setText(QCoreApplication::translate("HomePage", "Hi, John Doe!", nullptr));
         label_2->setText(QCoreApplication::translate("HomePage", "To begin the Quiz, upload pdf of the course material:", nullptr));
         btnUploadPDF->setText(QCoreApplication::translate("HomePage", "Upload PDF", nullptr));
         labelPDFStatus->setText(QCoreApplication::translate("HomePage", "No file selected!", nullptr));
-        btnGenerateQuiz->setText(QCoreApplication::translate("HomePage", "Generate Quiz", nullptr));
+        btnGenerateQuiz->setText(QCoreApplication::translate("HomePage", " Generate Quiz", nullptr));
         labelLoading->setText(QString());
         btnStartQuiz->setText(QCoreApplication::translate("HomePage", "Start Quiz", nullptr));
     } // retranslateUi

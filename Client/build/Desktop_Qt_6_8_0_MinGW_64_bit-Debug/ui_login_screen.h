@@ -180,9 +180,7 @@ public:
         Login_Btn->setCursor(QCursor(Qt::CursorShape::PointingHandCursor));
         Login_Btn->setFocusPolicy(Qt::FocusPolicy::TabFocus);
         Login_Btn->setAutoFillBackground(false);
-        Login_Btn->setStyleSheet(QString::fromUtf8("background-color: #211726;\n"
-"border-radius: 8px;\n"
-"color: #FAF6F0;"));
+        Login_Btn->setStyleSheet(QString::fromUtf8(""));
         Login_Btn->setFlat(false);
 
         verticalLayout_2->addWidget(Login_Btn);
