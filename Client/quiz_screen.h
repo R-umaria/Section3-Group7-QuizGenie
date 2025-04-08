@@ -23,7 +23,7 @@ class QuizScreen : public QWidget
     Q_OBJECT
 
 public:
-    explicit QuizScreen(QWidget *parent = nullptr, QString userName = "");
+    explicit QuizScreen(Client * client, QWidget *parent = nullptr, QString userName = "");
     ~QuizScreen();
 
     void loadQuestionsFromCSV(const QString &csvFilePath);
@@ -35,6 +35,7 @@ private:
     Ui::QuizScreen *ui;  // This matches the class name defined in the .ui file
     QVBoxLayout *questionsLayout;
     QVector<QButtonGroup*> buttonGroups;
+    QVector<QString> correctAnswers;
     QString userName;
     Client *client;
     void showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon);

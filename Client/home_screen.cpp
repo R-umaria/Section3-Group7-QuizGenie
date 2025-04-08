@@ -176,7 +176,7 @@ void HomePage::on_btnStartQuiz_clicked()
     static QuizScreen *quizScreen = nullptr;
 
     if (quizScreen == nullptr) {
-        quizScreen = new QuizScreen(nullptr, userName);
+        quizScreen = new QuizScreen(client, nullptr, userName);
         quizScreen->loadQuestionsFromCSV(QDir::currentPath() + "/UploadedPDFs/mcq_output.csv");
         quizScreen->show();
     } else {

@@ -5,10 +5,11 @@
 #include <QRegularExpression>
 #include <QGraphicsDropShadowEffect>
 
-QuizScreen::QuizScreen(QWidget *parent, QString userName) :
+QuizScreen::QuizScreen(Client *client, QWidget *parent, QString userName) :
     QWidget(parent),
     ui(new Ui::QuizScreen),
-    userName(userName)
+    userName(userName),
+    client(client)
 {
     ui->setupUi(this);
 
@@ -80,8 +81,10 @@ void QuizScreen::loadQuestionsFromCSV(const QString &csvFilePath)
         }
 
         // Extract question and options
+        // Pkt Def: Question,Option1,Option2,Option3,Option4,Answer
         QString question = fields[0];
-        QStringList options = fields.mid(1, 4);
+        QStringList options = fields.mid(1, 4); // Adds answer choices
+        correctAnswers.append(fields[5]); // Adds correct answers
 
         // Create a container for each question and its options
         QWidget *questionWidget = new QWidget(this);
@@ -116,11 +119,6 @@ void QuizScreen::loadQuestionsFromCSV(const QString &csvFilePath)
     }
 
     file.close();
-}
-
-void QuizScreen::onSubmitClicked()
-{
-    QMessageBox::information(this, "Quiz Submission", "Your answers have been submitted.");
 }
 
 void QuizScreen::showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon)
@@ -162,3 +160,25 @@ void QuizScreen::showCustomMessageBox(const QString &title, const QString &text,
     msgBox.exec();
 }
 
+void QuizScreen::onSubmitClicked()
+{
+    showCustomMessageBox("Quiz Submission", "Your answers have been submitted.", QMessageBox::Information);
+
+    int correctCount = 0;
+
+    for (int i = 0; i < buttonGroups.size(); ++i) {
+        QAbstractButton *selected = buttonGroups[i]->checkedButton();
+        if (!selected) {
+            continue; // User didn't select an answer for this question
+        }
+
+        QString userAnswer = selected->text().trimmed();
+        QString correctAnswer = correctAnswers[i].trimmed();
+        // answer debug
+        qDebug() << "Q" << i+1 << ": User =" << userAnswer << " | Correct =" << correctAnswer;
+        if (userAnswer.compare(correctAnswer, Qt::CaseInsensitive) == 0) {
+            correctCount++;
+        }
+    }
+    showCustomMessageBox("Quiz Results", QString("You got %1 out of %2 correct!").arg(correctCount).arg(correctAnswers.size()), QMessageBox::Information);
+}

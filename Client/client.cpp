@@ -2,6 +2,10 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QDir>
+#include <QGraphicsDropShadowEffect>
+#include <QSvgRenderer>
+#include <QPixmap>
+#include <QPainter>
 
 const QString SERVER_IP = "127.0.0.1";
 const int SERVER_PORT = 27000;
@@ -17,17 +21,15 @@ Client::~Client()
     }
 }
 
-void Client::connectToServer() {
+bool Client::connectToServer() {
     socket->connectToHost(SERVER_IP, SERVER_PORT);
     if (!socket->waitForConnected(3000)) {
-        QMessageBox::critical(nullptr, "Connection Failed", "Unable to connect to the server!");
-        return;
-
-        //remove after testing
-        //exit(1);
+        showCustomMessageBox("Connection Failed", "Unable to connect to the server.", QMessageBox::Critical);
+        return false;
     }
     else {
-        QMessageBox::information(nullptr, "Connection Successful", "Connected to Server!");
+        showCustomMessageBox("Connection Successful", "Connected to server.", QMessageBox::Information);
+        return true;
     }
 }
 
@@ -57,7 +59,7 @@ bool Client::authenticate(const QString &username, const QString &password)
     //socket->write(username.toUtf8() + "\n" + password.toUtf8());
 
     if (!socket->waitForBytesWritten()) {
-        QMessageBox::critical(nullptr, "Send Error", "Error sending authentication data!");
+        showCustomMessageBox("Send Error", "Error sending authentication data.", QMessageBox::Critical);
         return false;
     }
 
@@ -74,13 +76,13 @@ bool Client::authenticate(const QString &username, const QString &password)
 void Client::sendPDF(const QString &pdfFilePath)
 {
     if (!isAuthenticated()) {
-        QMessageBox::warning(nullptr, "Not Authenticated", "You must authenticate first!");
+        showCustomMessageBox("Not Authenticated", "You must authenticate first.", QMessageBox::Critical);
         return;
     }
 
     QFile file(pdfFilePath);
     if (!file.open(QIODevice::ReadOnly)) {
-        QMessageBox::critical(nullptr, "File Error", "Unable to open the PDF file!");
+        showCustomMessageBox("File Error", "Unable to open the PDF file.", QMessageBox::Critical);
         return;
     }
 
@@ -101,7 +103,7 @@ void Client::sendPDF(const QString &pdfFilePath)
     //Send packet header
     socket->write(packet);
     if (!socket->waitForBytesWritten()) {
-        QMessageBox::critical(nullptr, "Send Error", "Error sending file to the server!");
+        showCustomMessageBox("Send Error", "Error sending file to the server.", QMessageBox::Critical);
     }
 
     //send file in chunks
@@ -111,20 +113,18 @@ void Client::sendPDF(const QString &pdfFilePath)
         QByteArray chunk = fileData.mid(totalSent, CHUNK_SIZE);
         int bytesSent = socket->write(chunk);
         if(bytesSent==-1) {
-            QMessageBox::critical(nullptr, "Send Error", "Erro sending file chunk to the server!");
+            showCustomMessageBox("Send Error", "Error sending file chunk to the server.", QMessageBox::Critical);
             return;
         }
         totalSent +=bytesSent;
 
         if (!socket->waitForBytesWritten()) {
-            QMessageBox::critical(nullptr, "Send Error", "Error during chunk transmission!");
+            showCustomMessageBox("Send Error", "Error during chunk transmission.", QMessageBox::Critical);
         }
     }
 
     if (totalSent != dataSize) {
-        QMessageBox::critical(nullptr, "Send Error", "Failed to send complete file.");
-
-        //QMessageBox::information(nullptr, "Success", "PDF file successfully sent to the server!");
+        showCustomMessageBox("Send Error", "Failed to send complete file.", QMessageBox::Critical);
     }
 }
 
@@ -133,7 +133,7 @@ void Client::receiveCSV()
     //Wait for response
     qDebug() << "attempting to wait for ready read";
     if (!socket->waitForReadyRead()) {
-        QMessageBox::critical(nullptr, "Read Error", "Couldn't receive CSV file.");
+        showCustomMessageBox("Read Error", "Couldn't receive CSV file.", QMessageBox::Critical);
         qDebug() <<"NO CSV";
         return;
     }
@@ -147,7 +147,7 @@ void Client::receiveCSV()
     }
 
     if(fileData.isEmpty()) {
-        QMessageBox::critical(nullptr, "No Data", "No CSV file received from the server.");
+        showCustomMessageBox("No Data", "No CSV file received from the server.", QMessageBox::Critical);
         return;
     }
 
@@ -172,7 +172,7 @@ void Client::receiveCSV()
         file.close();
         qDebug() <<"CSV file saved successfully";
     } else {
-        QMessageBox::critical(nullptr, "File Error", "Failed to save CSV file.");
+        showCustomMessageBox("File Error", "Failed to save CSV file.", QMessageBox::Critical);
     }
 
     //check to make sure csv received correctly
@@ -195,4 +195,43 @@ void Client::receiveCSV()
 bool Client::isAuthenticated() const
 {
     return authenticated;
+}
+
+void Client::showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon)
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(title);
+    msgBox.setText(text);
+    msgBox.setIcon(icon);
+
+    msgBox.setMinimumSize(350, 250);
+
+    msgBox.setStyleSheet("QMessageBox {"
+                         "background-color: #beb4e4;"
+                         "color: #7865c8;"
+                         "font-size: 16px;"
+                         "}"
+                         "QMessageBox QLabel {"
+                         "color: #FAF6F0;"
+                         "}"
+                         "QMessageBox QPushButton {"
+                         "background-color: #8d7cd0;"
+                         "border-radius: 5px;"
+                         "color: #FAF6F0;"
+                         "padding: 5px;"
+                         "}"
+                         "QMessageBox QPushButton:hover {"
+                         "background-color: #7865c8;"
+                         "}");
+
+    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect(&msgBox);
+    shadowEffect->setBlurRadius(20);
+    shadowEffect->setXOffset(0);
+    shadowEffect->setYOffset(0);
+    shadowEffect->setColor(QColor(0, 0, 0, 160));
+    msgBox.setGraphicsEffect(shadowEffect);
+
+    msgBox.setAttribute(Qt::WA_StyledBackground);
+
+    msgBox.exec();
 }

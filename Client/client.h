@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTcpSocket>
 #include <QByteArray>
+#include <QMessageBox>
 
 class Client : public QObject
 {
@@ -11,7 +12,7 @@ class Client : public QObject
 public:
     explicit Client(QObject *parent = nullptr);
     ~Client();
-    void connectToServer();
+    bool connectToServer();
     bool authenticate(const QString &username, const QString &password);
     void sendPDF(const QString &pdfFilePath);
     void receiveCSV();
@@ -20,6 +21,7 @@ public:
 private:
     QTcpSocket *socket;
     bool authenticated;
+    void showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon);
 };
 
 #endif // CLIENT_H
