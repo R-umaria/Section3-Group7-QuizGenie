@@ -63,7 +63,7 @@ void MainWindow::on_loginButton_clicked()
     QString username = ui->User_name_txtfield->text();
     QString password = ui->Password_txtfield->text();
 
-    if(!client->authenticate(username, password)) {
+    if(client->authenticate(username, password)) {
     //if (username == "admin" && password == "1234") {
         QMessageBox::information(this, "Login", "Login successful!");
 
