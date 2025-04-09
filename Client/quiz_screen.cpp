@@ -162,7 +162,7 @@ void QuizScreen::showCustomMessageBox(const QString &title, const QString &text,
 
 void QuizScreen::onSubmitClicked()
 {
-    showCustomMessageBox("Quiz Submission", "Your answers have been submitted.", QMessageBox::Information);
+    showCustomMessageBox("Quiz Submitted", "Your score is now being calculated.", QMessageBox::Information);
 
     int correctCount = 0;
 
@@ -186,11 +186,11 @@ void QuizScreen::onSubmitClicked()
     QString title, text;
     if(correctCount < 5) {
         title = "Quiz Failed!";
-        text = "You scored less than 50% :(";
+        text = QString("You failed the quiz! You got %1/%2").arg(correctCount).arg(correctAnswers.size());
     }
     else if (correctCount >= 5) {
         title = "Quiz Passed!";
-        text = "You passed the test! :D";
+        text = QString("Good Job! You got %1/%2!").arg(correctCount).arg(correctAnswers.size());
     }
     //showCustomMessageBox("Quiz Results", QString("You got %1 out of %2 correct!").arg(correctCount).arg(correctAnswers.size()), QMessageBox::Information);
 

@@ -282,6 +282,59 @@ bool Client::isAuthenticated() const
     return authenticated;
 }
 
+////////WORKS
+// void Client::showImageInMessageBox(const QString &imagePath, const QString &title, const QString &message) {
+//     // Create a custom dialog
+//     QDialog msgBox;
+//     msgBox.setWindowTitle(title);
+
+//     // Log the image path to ensure it's correct
+//     qDebug() << "Image Path: " << imagePath;
+
+//     // Load the image
+//     QPixmap image(imagePath);
+
+//     // Check if the image was loaded successfully
+//     if (image.isNull()) {
+//         QMessageBox::critical(&msgBox, "Error", "Failed to load the image.");
+//         return;
+//     }
+
+//     // Log the original size of the image
+//     qDebug() << "Original Image Size: " << image.size();
+
+//     // Set a maximum size for the image to fit within the message box
+//     const int maxWidth = 600;
+//     const int maxHeight = 400;
+
+//     // Resize the image if it's too large
+//     if (image.width() > maxWidth || image.height() > maxHeight) {
+//         image = image.scaled(maxWidth, maxHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+//         qDebug() << "Scaled Image Size: " << image.size();
+//     }
+
+//     // Create a QLabel to hold the image
+//     QLabel *imageLabel = new QLabel();
+//     imageLabel->setPixmap(image);
+//     imageLabel->setAlignment(Qt::AlignCenter);  // Center the image
+
+//     // Create another QLabel for the message text
+//     QLabel *textLabel = new QLabel(message);
+//     textLabel->setWordWrap(true);  // Allow text to wrap if it's too long
+
+//     // Customize the layout of the message box
+//     QVBoxLayout *layout = new QVBoxLayout;
+//     layout->addWidget(imageLabel);  // Add the image label
+//     layout->addWidget(textLabel);   // Add the text label
+
+//     // Set the layout to the dialog's layout
+//     msgBox.setLayout(layout);
+
+//     // Show the custom message dialog
+//     msgBox.exec();
+// }
+////////
+
 void Client::showImageInMessageBox(const QString &imagePath, const QString &title, const QString &message) {
     // Create a custom dialog
     QDialog msgBox;
@@ -320,6 +373,7 @@ void Client::showImageInMessageBox(const QString &imagePath, const QString &titl
     // Create another QLabel for the message text
     QLabel *textLabel = new QLabel(message);
     textLabel->setWordWrap(true);  // Allow text to wrap if it's too long
+    textLabel->setAlignment(Qt::AlignCenter);  // Center the text at the bottom
 
     // Customize the layout of the message box
     QVBoxLayout *layout = new QVBoxLayout;
@@ -328,6 +382,30 @@ void Client::showImageInMessageBox(const QString &imagePath, const QString &titl
 
     // Set the layout to the dialog's layout
     msgBox.setLayout(layout);
+
+    // Apply the custom stylesheet
+    msgBox.setStyleSheet(
+        "QDialog {"
+        "background-color: #beb4e4;"
+        "color: #7865c8;"
+        "font-size: 16px;"
+        "}"
+        "QDialog QLabel {"
+        "color: #8d7cd0;"
+        "border-radius: 8px;"
+        "padding: 8px 16px;"
+        "font-size: 20px;"
+        "font-weight: bold;"
+        "}"
+        "QDialog QPushButton {"
+        "background-color: #8d7cd0;"
+        "border-radius: 5px;"
+        "color: #FAF6F0;"
+        "padding: 5px;"
+        "}"
+        "QDialog QPushButton:hover {"
+        "background-color: #7865c8;"
+        "}");
 
     // Show the custom message dialog
     msgBox.exec();
