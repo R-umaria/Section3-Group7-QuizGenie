@@ -12,7 +12,6 @@
 #include <QMessageBox>
 #include <QLabel>
 #include "client.h"
-//class Client;
 
 namespace Ui {
 class QuizScreen; // Make sure this matches the name in the .ui file
@@ -30,6 +29,7 @@ public:
 
 private slots:
     void onSubmitClicked();
+    void onRetakeQuizClicked();  // Add the slot for the "Retake Quiz" button
 
 private:
     Ui::QuizScreen *ui;  // This matches the class name defined in the .ui file

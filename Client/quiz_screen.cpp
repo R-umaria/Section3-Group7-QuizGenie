@@ -1,5 +1,6 @@
 #include "quiz_screen.h"
 #include "ui_quiz_screen.h"
+#include "home_screen.h"  // Include the header for the home screen
 #include <QLabel>
 #include <QFileDialog>
 #include <QRegularExpression>
@@ -69,7 +70,7 @@ QuizScreen::QuizScreen(Client *client, QWidget *parent, QString userName) :
         "QWidget {"
         "    background-color: #f4eff5;"
         "}"
-    );
+        );
 }
 
 QuizScreen::~QuizScreen()
@@ -188,6 +189,10 @@ void QuizScreen::showCustomMessageBox(const QString &title, const QString &text,
 
     msgBox.setAttribute(Qt::WA_StyledBackground);
 
+    // Add "Retake Quiz" button
+    QPushButton *retakeButton = msgBox.addButton("Retake Quiz", QMessageBox::ActionRole);
+    connect(retakeButton, &QPushButton::clicked, this, &QuizScreen::onRetakeQuizClicked);
+
     msgBox.exec();
 }
 
@@ -228,4 +233,12 @@ void QuizScreen::onSubmitClicked()
     QString score = QString::number(correctCount);
     client->sendScore(score);
     client->showImageInMessageBox(client->receiveImage(), title, text);
+}
+
+void QuizScreen::onRetakeQuizClicked()
+{
+    // Open HomePage and pass the user's name
+    HomePage *homePage = new HomePage(client, nullptr, userName);
+    homePage->show();
+    this->close();  // Close the current quiz screen
 }

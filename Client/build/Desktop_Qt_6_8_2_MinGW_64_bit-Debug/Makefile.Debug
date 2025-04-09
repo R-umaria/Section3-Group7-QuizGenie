@@ -125,7 +125,6 @@ debug/qrc_resources.cpp: ../../resources.qrc \
 		../../UploadedPDFs/mcq_output.csv \
 		../../assets/logo_horizontal.png \
 		../../assets/gemini-icon.svg \
-		../../assets/loading.gif \
 		../../assets/Logo.png
 	C:\Qt\6.8.2\mingw_64\bin\rcc.exe -name resources --no-zstd ..\..\resources.qrc -o debug\qrc_resources.cpp
 
@@ -343,20 +342,6 @@ debug/moc_home_screen.cpp: ../../home_screen.h \
 		C:/Qt/6.8.2/mingw_64/include/QtWidgets/QMessageBox \
 		C:/Qt/6.8.2/mingw_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/6.8.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/QMovie \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qmovie.h \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qimagereader.h \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qimageiohandler.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qplugin.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qpointer.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/q20algorithm.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qfactoryinterface.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/QTimer \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qbasictimer.h \
@@ -391,6 +376,7 @@ debug/moc_home_screen.cpp: ../../home_screen.h \
 		C:/Qt/6.8.2/mingw_64/include/QtNetwork/qabstractsocket.h \
 		C:/Qt/6.8.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/QByteArray \
+		../../home_screen.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.8.2/mingw_64/bin/moc.exe
 	C:\Qt\6.8.2\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/Rishi/source/repos/Project 4/Group Project/QuizGenie/Client/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/debug/moc_predefs.h" -IC:/Qt/6.8.2/mingw_64/mkspecs/win32-g++ -I"C:/Users/Rishi/source/repos/Project 4/Group Project/QuizGenie/Client" -IC:/Qt/6.8.2/mingw_64/include -IC:/Qt/6.8.2/mingw_64/include/QtSvg -IC:/Qt/6.8.2/mingw_64/include/QtWidgets -IC:/Qt/6.8.2/mingw_64/include/QtGui -IC:/Qt/6.8.2/mingw_64/include/QtNetwork -IC:/Qt/6.8.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\home_screen.h -o debug\moc_home_screen.cpp
@@ -604,20 +590,6 @@ debug/moc_login_screen.cpp: ../../login_screen.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qfileinfo.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qtimezone.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/QMovie \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qmovie.h \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qimagereader.h \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qimageiohandler.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qplugin.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qpointer.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/q20algorithm.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qfactoryinterface.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/QTimer \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qbasictimer.h \
@@ -883,6 +855,19 @@ debug/moc_quiz_screen.cpp: ../../quiz_screen.h \
 		C:/Qt/6.8.2/mingw_64/include/QtNetwork/qabstractsocket.h \
 		C:/Qt/6.8.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/QByteArray \
+		../../home_screen.h \
+		C:/Qt/6.8.2/mingw_64/include/QtWidgets/QFileDialog \
+		C:/Qt/6.8.2/mingw_64/include/QtWidgets/qfiledialog.h \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/qdir.h \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/qdirlisting.h \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/qfileinfo.h \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/qtimezone.h \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/QTimer \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/qtimer.h \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/qbasictimer.h \
+		../../quiz_screen.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.8.2/mingw_64/bin/moc.exe
 	C:\Qt\6.8.2\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/Rishi/source/repos/Project 4/Group Project/QuizGenie/Client/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/debug/moc_predefs.h" -IC:/Qt/6.8.2/mingw_64/mkspecs/win32-g++ -I"C:/Users/Rishi/source/repos/Project 4/Group Project/QuizGenie/Client" -IC:/Qt/6.8.2/mingw_64/include -IC:/Qt/6.8.2/mingw_64/include/QtSvg -IC:/Qt/6.8.2/mingw_64/include/QtWidgets -IC:/Qt/6.8.2/mingw_64/include/QtGui -IC:/Qt/6.8.2/mingw_64/include/QtNetwork -IC:/Qt/6.8.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\quiz_screen.h -o debug\moc_quiz_screen.cpp
@@ -1328,20 +1313,6 @@ debug/home_screen.o: ../../home_screen.cpp ../../home_screen.h \
 		C:/Qt/6.8.2/mingw_64/include/QtWidgets/QMessageBox \
 		C:/Qt/6.8.2/mingw_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/6.8.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/QMovie \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qmovie.h \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qimagereader.h \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qimageiohandler.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qplugin.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qpointer.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/q20algorithm.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qfactoryinterface.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/QTimer \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qbasictimer.h \
@@ -1607,20 +1578,6 @@ debug/login_screen.o: ../../login_screen.cpp ../../login_screen.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qfileinfo.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qtimezone.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/QMovie \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qmovie.h \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qimagereader.h \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qimageiohandler.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qplugin.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qpointer.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/q20algorithm.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qfactoryinterface.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/QTimer \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qbasictimer.h \
@@ -1888,20 +1845,6 @@ debug/main.o: ../../main.cpp C:/Qt/6.8.2/mingw_64/include/QtWidgets/QApplication
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qfileinfo.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qtimezone.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/QFile \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/QMovie \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qmovie.h \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qimagereader.h \
-		C:/Qt/6.8.2/mingw_64/include/QtGui/qimageiohandler.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qplugin.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qpointer.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qjsonobject.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qjsonvalue.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qcborvalue.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qcborcommon.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qregularexpression.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/quuid.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/q20algorithm.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/qfactoryinterface.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/QTimer \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qbasictimer.h \
@@ -2165,11 +2108,7 @@ debug/quiz_screen.o: ../../quiz_screen.cpp ../../quiz_screen.h \
 		C:/Qt/6.8.2/mingw_64/include/QtNetwork/qabstractsocket.h \
 		C:/Qt/6.8.2/mingw_64/include/QtNetwork/qhostaddress.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/QByteArray \
-		ui_quiz_screen.h \
-		C:/Qt/6.8.2/mingw_64/include/QtCore/QVariant \
-		C:/Qt/6.8.2/mingw_64/include/QtWidgets/QApplication \
-		C:/Qt/6.8.2/mingw_64/include/QtWidgets/qapplication.h \
-		C:/Qt/6.8.2/mingw_64/include/QtWidgets/QHBoxLayout \
+		../../home_screen.h \
 		C:/Qt/6.8.2/mingw_64/include/QtWidgets/QFileDialog \
 		C:/Qt/6.8.2/mingw_64/include/QtWidgets/qfiledialog.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qdir.h \
@@ -2178,6 +2117,14 @@ debug/quiz_screen.o: ../../quiz_screen.cpp ../../quiz_screen.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qcalendar.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qfileinfo.h \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qtimezone.h \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/QTimer \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/qtimer.h \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/qbasictimer.h \
+		ui_quiz_screen.h \
+		C:/Qt/6.8.2/mingw_64/include/QtCore/QVariant \
+		C:/Qt/6.8.2/mingw_64/include/QtWidgets/QApplication \
+		C:/Qt/6.8.2/mingw_64/include/QtWidgets/qapplication.h \
+		C:/Qt/6.8.2/mingw_64/include/QtWidgets/QHBoxLayout \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/QRegularExpression \
 		C:/Qt/6.8.2/mingw_64/include/QtCore/qregularexpression.h \
 		C:/Qt/6.8.2/mingw_64/include/QtWidgets/QGraphicsDropShadowEffect \
