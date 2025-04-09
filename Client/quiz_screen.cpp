@@ -166,6 +166,7 @@ void QuizScreen::onSubmitClicked()
 
     int correctCount = 0;
 
+    // Calculate score
     for (int i = 0; i < buttonGroups.size(); ++i) {
         QAbstractButton *selected = buttonGroups[i]->checkedButton();
         if (!selected) {
@@ -180,5 +181,20 @@ void QuizScreen::onSubmitClicked()
             correctCount++;
         }
     }
-    showCustomMessageBox("Quiz Results", QString("You got %1 out of %2 correct!").arg(correctCount).arg(correctAnswers.size()), QMessageBox::Information);
+
+    // Calculate win/lose
+    QString title, text;
+    if(correctCount < 5) {
+        title = "Quiz Failed!";
+        text = "You scored less than 50% :(";
+    }
+    else if (correctCount >= 5) {
+        title = "Quiz Passed!";
+        text = "You passed the test! :D";
+    }
+    //showCustomMessageBox("Quiz Results", QString("You got %1 out of %2 correct!").arg(correctCount).arg(correctAnswers.size()), QMessageBox::Information);
+
+    QString score = QString::number(correctCount);
+    client->sendScore(score);
+    client->showImageInMessageBox(client->receiveImage(), title, text);
 }

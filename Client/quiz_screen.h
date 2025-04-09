@@ -11,8 +11,8 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include <QLabel>
-
-class Client;
+#include "client.h"
+//class Client;
 
 namespace Ui {
 class QuizScreen; // Make sure this matches the name in the .ui file

@@ -16,7 +16,10 @@ public:
     bool authenticate(const QString &username, const QString &password);
     void sendPDF(const QString &pdfFilePath);
     void receiveCSV();
+    QString receiveImage();
     bool isAuthenticated() const;
+    void showImageInMessageBox(const QString &imagePath, const QString &title, const QString &text);
+    void sendScore(QString score);
 
 private:
     QTcpSocket *socket;

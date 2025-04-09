@@ -6,6 +6,8 @@
 #include <QSvgRenderer>
 #include <QPixmap>
 #include <QPainter>
+#include <QLabel>
+#include <QVBoxLayout>
 
 const QString SERVER_IP = "127.0.0.1";
 const int SERVER_PORT = 27000;
@@ -54,9 +56,6 @@ bool Client::authenticate(const QString &username, const QString &password)
 
     //Send packet
     socket->write(packet);
-    //////
-
-    //socket->write(username.toUtf8() + "\n" + password.toUtf8());
 
     if (!socket->waitForBytesWritten()) {
         showCustomMessageBox("Send Error", "Error sending authentication data.", QMessageBox::Critical);
@@ -71,6 +70,31 @@ bool Client::authenticate(const QString &username, const QString &password)
         authenticated = false;
     }
     return authenticated;
+}
+
+void Client::sendScore(QString score) {
+
+    qDebug() << "Score: " + score;
+    QByteArray data = score.toUtf8();
+    qint64 dataSize = static_cast<qint64>(data.size());
+    QByteArray dataSizeStr = QByteArray::number(dataSize);
+
+    //Create Packet
+    QByteArray packet;
+    QByteArray packetType = "SCORE";
+    packet.append(packetType);
+    packet.append("|");
+    packet.append(dataSizeStr);
+    packet.append("|");
+    packet.append(data);
+
+    //Send packet
+    socket->write(packet);
+
+    if (!socket->waitForBytesWritten()) {
+        showCustomMessageBox("Send Error", "Error sending score.", QMessageBox::Critical);
+        exit(1);
+    }
 }
 
 void Client::sendPDF(const QString &pdfFilePath)
@@ -192,9 +216,121 @@ void Client::receiveCSV()
     }
 }
 
+
+QString Client::receiveImage() {
+    if (!socket->waitForReadyRead()) {
+        showCustomMessageBox("Read Error", "Couldn't receive image from server.", QMessageBox::Critical);
+        exit(1);
+    }
+
+    // Read the file size (4 bytes)
+    QByteArray sizeData = socket->read(4);
+    if (sizeData.size() < 4) {
+        showCustomMessageBox("Error", "Failed to receive the file size.", QMessageBox::Critical);
+        exit(1);
+    }
+    int fileSize = *reinterpret_cast<int*>(sizeData.data());
+    qDebug() << "File size received: " << fileSize;
+
+    QByteArray imageData;
+    int bytesReceived = 0;
+
+    // Read the image data in chunks
+    while (bytesReceived < fileSize) {
+        if (socket->bytesAvailable() > 0) {
+            QByteArray chunk = socket->read(1024);  // Read in chunks of 1KB
+            qDebug() << "Received " << chunk.size() << " bytes, Total received: " << bytesReceived;
+            imageData.append(chunk);
+            bytesReceived += chunk.size();
+        } else {
+            qDebug() << "No data available yet, waiting...";
+            socket->waitForReadyRead(100);  // Wait for more data
+        }
+    }
+
+    if (imageData.isEmpty()) {
+        showCustomMessageBox("No Data", "No image received from the server.", QMessageBox::Critical);
+        exit(1);
+    }
+
+    // Create folder for image
+    QString imageFolder = QDir::currentPath() + "/UploadedImages/";
+    QDir().mkpath(imageFolder);
+
+    // Save the received image
+    QString imageName = "received_image.jpg";
+    QString imagePath = imageFolder + imageName;
+
+    // Remove image if already exists
+    if (QFile::exists(imagePath)) {
+        QFile::remove(imagePath);
+    }
+
+    QFile file(imagePath);
+    if (file.open(QIODevice::WriteOnly)) {
+        file.write(imageData);
+        file.close();
+        return imagePath;
+    } else {
+        showCustomMessageBox("File Error", "Failed to save image file.", QMessageBox::Critical);
+        exit(1);
+    }
+}
+
 bool Client::isAuthenticated() const
 {
     return authenticated;
+}
+
+void Client::showImageInMessageBox(const QString &imagePath, const QString &title, const QString &message) {
+    // Create a custom dialog
+    QDialog msgBox;
+    msgBox.setWindowTitle(title);
+
+    // Log the image path to ensure it's correct
+    qDebug() << "Image Path: " << imagePath;
+
+    // Load the image
+    QPixmap image(imagePath);
+
+    // Check if the image was loaded successfully
+    if (image.isNull()) {
+        QMessageBox::critical(&msgBox, "Error", "Failed to load the image.");
+        return;
+    }
+
+    // Log the original size of the image
+    qDebug() << "Original Image Size: " << image.size();
+
+    // Set a maximum size for the image to fit within the message box
+    const int maxWidth = 600;
+    const int maxHeight = 400;
+
+    // Resize the image if it's too large
+    if (image.width() > maxWidth || image.height() > maxHeight) {
+        image = image.scaled(maxWidth, maxHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        qDebug() << "Scaled Image Size: " << image.size();
+    }
+
+    // Create a QLabel to hold the image
+    QLabel *imageLabel = new QLabel();
+    imageLabel->setPixmap(image);
+    imageLabel->setAlignment(Qt::AlignCenter);  // Center the image
+
+    // Create another QLabel for the message text
+    QLabel *textLabel = new QLabel(message);
+    textLabel->setWordWrap(true);  // Allow text to wrap if it's too long
+
+    // Customize the layout of the message box
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(imageLabel);  // Add the image label
+    layout->addWidget(textLabel);   // Add the text label
+
+    // Set the layout to the dialog's layout
+    msgBox.setLayout(layout);
+
+    // Show the custom message dialog
+    msgBox.exec();
 }
 
 void Client::showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon)
@@ -235,3 +371,5 @@ void Client::showCustomMessageBox(const QString &title, const QString &text, QMe
 
     msgBox.exec();
 }
+
+
