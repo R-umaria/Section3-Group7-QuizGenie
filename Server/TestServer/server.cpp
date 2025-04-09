@@ -1,7 +1,6 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
-#include <winsock2.h>
-#include <ws2tcpip.h>
+#include "server.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,9 +9,6 @@
 #include <ctime>
 
 #pragma comment(lib, "Ws2_32.lib")
-
-const int SERVER_PORT = 27000;
-const int CHUNK_SIZE = 1024;
 
 void sendAll(SOCKET clientSocket, const std::string& data) {
     int totalSent = 0;
@@ -191,7 +187,7 @@ int main() {
             if (parts.size() >= 3) {
                 std::string packetType = parts[0];
                 int dataSize = std::stoi(parts[1]);
-                std::string data = packet.substr(packetType.size() + parts[1].size() + 2); // skip two commas
+                std::string data = packet.substr(packetType.size() + parts[1].size() + 2); // skip two separators
 
                 if (packetType == "AUTH") {
                     std::string username = data.substr(0, data.find(','));
@@ -238,7 +234,7 @@ int main() {
                     outFile.close();
                     std::cout << "PDF file received successfully.\n";
                     saveToFile("PDF received from Client.\n");
-                    
+
                     // Generate a CSV file to send back to the client
                     std::string csvFilePath = "mcq_output.csv";
                     generateCSV(csvFilePath);
@@ -263,7 +259,7 @@ int main() {
                 else if (packetType == "SCORE") {
                     std::cout << "Score packet received.\n";
 
-                    // Extract the actual score from the payload (already split into 'data')
+                    // Extract the actual score from the payload
                     try {
                         int score = std::stoi(data);
                         std::cout << "Score received: " << score << "\n";
@@ -272,7 +268,7 @@ int main() {
                         // Append the score to a text file
                         std::ofstream scoreFile("scores.txt", std::ios::app); // append mode
                         if (scoreFile.is_open()) {
-                            scoreFile << "Client Score: " << score <<  "/10" << "\n";
+                            scoreFile << "Client Score: " << score << "/10" << "\n";
                             std::cout << "score: " << score << "/10";
                             scoreFile.close();
                             if (score >= 5) {

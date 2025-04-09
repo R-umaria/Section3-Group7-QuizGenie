@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
 <Qt_DEFINES_>_WINDOWS;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_WIDGETS_LIB;QT_SVG_LIB;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB</Qt_DEFINES_>
-<Qt_INCLUDEPATH_>"C:\Conestoga\Year 2\Term 2\Project IV\proj4\Section3-Group7-QuizGenie\Client\build\Desktop_Qt_6_9_0_MSVC2022_64bit-Debug\qtcgen_vs\debug\qt\qmake";C:\Qt\6.9.0\msvc2022_64\include;C:\Qt\6.9.0\msvc2022_64\include\QtWidgets;C:\Qt\6.9.0\msvc2022_64\include\QtSvg;C:\Qt\6.9.0\msvc2022_64\include\QtGui;C:\Qt\6.9.0\msvc2022_64\include\QtNetwork;C:\Qt\6.9.0\msvc2022_64\include\QtCore;"C:\Conestoga\Year 2\Term 2\Project IV\proj4\Section3-Group7-QuizGenie\Client\build\Desktop_Qt_6_9_0_MSVC2022_64bit-Debug\qtcgen_vs\debug\qt\qmake";C:\Qt\6.9.0\msvc2022_64\mkspecs\win32-msvc</Qt_INCLUDEPATH_>
+<Qt_INCLUDEPATH_>"C:\Users\Rishi\source\repos\Project 4\Group Project\QuizGenie\Client\build\Desktop_Qt_6_9_0_MSVC2022_64bit-Debug\qtcgen_vs\debug\qt\qmake";C:\Qt\6.9.0\msvc2022_64\include;C:\Qt\6.9.0\msvc2022_64\include\QtWidgets;C:\Qt\6.9.0\msvc2022_64\include\QtSvg;C:\Qt\6.9.0\msvc2022_64\include\QtGui;C:\Qt\6.9.0\msvc2022_64\include\QtNetwork;C:\Qt\6.9.0\msvc2022_64\include\QtCore;"C:\Users\Rishi\source\repos\Project 4\Group Project\QuizGenie\Client\build\Desktop_Qt_6_9_0_MSVC2022_64bit-Debug\qtcgen_vs\debug\qt\qmake";C:\Qt\6.9.0\msvc2022_64\mkspecs\win32-msvc</Qt_INCLUDEPATH_>
 <Qt_STDCPP_>stdcpp17</Qt_STDCPP_>
 <Qt_RUNTIME_>MultiThreadedDebugDLL</Qt_RUNTIME_>
 <Qt_CL_OPTIONS_>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8</Qt_CL_OPTIONS_>
@@ -32,7 +32,7 @@
 <QMake_QMAKE_XSPEC_>win32-msvc</QMake_QMAKE_XSPEC_>
 <QMake_QMAKE_VERSION_>3.1</QMake_QMAKE_VERSION_>
 <QMake_QT_VERSION_>6.9.0</QMake_QT_VERSION_>
-<QtBkup_QtHash>jVExbsMwDPwKXxBvBTJkkElGZSOLKkUlCIqg//9FZcOFgS7VwEW8O96dvoQ4u/jz8ulvpzOgGkNsApn9oXaDh1Bkr1DvEWbJ2xBfJXO9TMX0g9EncV62R3HRHE1bmTChLkUSdxR3IHKtageqgmRMjbgEfx+VCkTbiZB2Mol1A2rC3aITljIqlUKOLUSuHjIFI7DWi1h4lL/Dk8wW7AmYvrWs6YdrObLsROha/7B77Nt0EHt5nPsH4hp/3Y15+KPye554bvH1Aw==</QtBkup_QtHash>
+<QtBkup_QtHash>jVExbsMwDPwKX1BvBTpkkEVGYSOTKkUlCIIi//9FZcOFgS7VwEW8O96dnowkzv44ffnr/e0DohpBagxCfle7wp0xkVeotwQzyzZIZxaqp6mYflL0iZ2W7ZGdVZJpK1PMUZfCmTqKOjBSrWoHqgJLzA2pBL+MSgXE7UTIOxnZugE1pm7RMZYyKpWDpBYSVQ+CwRCs9SYWGuXv8MyzBXtAzC8ta/rhWo4sOxG61j/sHvs6HcReHkn/wbjGX3djHv6o/J5Hmlv6/gE=</QtBkup_QtHash>
     <QtVersion>6.9.0</QtVersion>
     <QtVersionMajor>6</QtVersionMajor>
     <QtVersionMinor>9</QtVersionMinor>

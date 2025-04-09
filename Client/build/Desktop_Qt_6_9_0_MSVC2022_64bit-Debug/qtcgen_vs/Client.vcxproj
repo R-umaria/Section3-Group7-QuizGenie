@@ -40,11 +40,11 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(QtMsBuild)\qt_defaults.props" Condition="Exists('$(QtMsBuild)\qt_defaults.props')" />
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtInstall>QT6.9</QtInstall>
+    <QtInstall>QT_6.9</QtInstall>
     <QtModules>core;gui;network;widgets;svg</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <QtInstall>QT6.9</QtInstall>
+    <QtInstall>QT_6.9</QtInstall>
     <QtModules>core;gui;network;widgets;svg</QtModules>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') OR !Exists('$(QtMsBuild)\Qt.props')">
@@ -113,7 +113,7 @@
     </ResourceCompile>
     <QtMoc>
       <CompilerFlavor>msvc</CompilerFlavor>
-      <Include>C:/Conestoga/Year 2/Term 2/Project IV/proj4/Section3-Group7-QuizGenie/Client/build/Desktop_Qt_6_9_0_MSVC2022_64bit-$(Configuration)/qtcgen_vs/$(Configuration)/moc_predefs.h</Include>
+      <Include>C:/Users/Rishi/source/repos/Project 4/Group Project/QuizGenie/Client/build/Desktop_Qt_6_9_0_MSVC2022_64bit-$(Configuration)/qtcgen_vs/$(Configuration)/moc_predefs.h</Include>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <DynamicSource>output</DynamicSource>
       <QtMocDir>$(Configuration)</QtMocDir>
@@ -179,7 +179,7 @@
     </ResourceCompile>
     <QtMoc>
       <CompilerFlavor>msvc</CompilerFlavor>
-      <Include>C:/Conestoga/Year 2/Term 2/Project IV/proj4/Section3-Group7-QuizGenie/Client/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Debug/qtcgen_vs/$(Configuration)/moc_predefs.h</Include>
+      <Include>C:/Users/Rishi/source/repos/Project 4/Group Project/QuizGenie/Client/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Debug/qtcgen_vs/$(Configuration)/moc_predefs.h</Include>
       <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
       <DynamicSource>output</DynamicSource>
       <QtMocDir>$(Configuration)</QtMocDir>
