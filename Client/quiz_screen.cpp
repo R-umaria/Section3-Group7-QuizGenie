@@ -190,7 +190,7 @@ void QuizScreen::showCustomMessageBox(const QString &title, const QString &text,
     msgBox.setAttribute(Qt::WA_StyledBackground);
 
     // Add "Retake Quiz" button
-    QPushButton *retakeButton = msgBox.addButton("Retake Quiz", QMessageBox::ActionRole);
+    QPushButton *retakeButton = msgBox.addButton("Back to HomePage", QMessageBox::ActionRole);
     connect(retakeButton, &QPushButton::clicked, this, &QuizScreen::onRetakeQuizClicked);
 
     msgBox.exec();
