@@ -47,7 +47,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(QuizScreen->sizePolicy().hasHeightForWidth());
         QuizScreen->setSizePolicy(sizePolicy);
-        QuizScreen->setStyleSheet(QString::fromUtf8(""));
+        QuizScreen->setStyleSheet(QString::fromUtf8("background-color: #e8dfec;"));
         horizontalLayout = new QHBoxLayout(QuizScreen);
         horizontalLayout->setObjectName("horizontalLayout");
         verticalLayout = new QVBoxLayout();
@@ -63,7 +63,7 @@ public:
         top_menubar->setMinimumSize(QSize(1000, 45));
         top_menubar->setMaximumSize(QSize(1080, 112));
         top_menubar->setStyleSheet(QString::fromUtf8("background-color: rgba(120, 101, 200, 100);\n"
-"border-radius: 28px;"));
+"border-radius: 29px;"));
         horizontalLayout_5 = new QHBoxLayout(top_menubar);
         horizontalLayout_5->setSpacing(200);
         horizontalLayout_5->setObjectName("horizontalLayout_5");
@@ -82,11 +82,9 @@ public:
         font.setPointSize(20);
         font.setBold(true);
         labelUserName->setFont(font);
-        labelUserName->setStyleSheet(QString::fromUtf8("padding-left: 5px;\n"
-"padding-bottom: 3px;\n"
-"padding-top: 0px;\n"
+        labelUserName->setStyleSheet(QString::fromUtf8("padding: 5px;\n"
 "color: #ffffff;\n"
-"background-color: rgba(0,0,0,0);"));
+"background-color: rgba(0, 0,0,0);"));
         labelUserName->setWordWrap(false);
 
         horizontalLayout_5->addWidget(labelUserName, 0, Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
@@ -99,11 +97,9 @@ public:
         font1.setPointSize(14);
         font1.setBold(true);
         label->setFont(font1);
-        label->setStyleSheet(QString::fromUtf8("padding-right: 5px;\n"
-"padding-bottom: 3px;\n"
-"padding-top: 0px;\n"
+        label->setStyleSheet(QString::fromUtf8("padding: 5px;\n"
 "color: #ffffff;\n"
-"background-color: rgba(0,0,0,0);"));
+"background-color: rgba(0, 0,0,0);"));
 
         horizontalLayout_5->addWidget(label, 0, Qt::AlignmentFlag::AlignRight);
 
@@ -117,8 +113,8 @@ public:
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(verticalFrame->sizePolicy().hasHeightForWidth());
         verticalFrame->setSizePolicy(sizePolicy3);
-        verticalFrame->setMinimumSize(QSize(1015, 45));
-        verticalFrame->setMaximumSize(QSize(1015, 45));
+        verticalFrame->setMinimumSize(QSize(1015, 43));
+        verticalFrame->setMaximumSize(QSize(1015, 43));
         verticalLayout_2 = new QVBoxLayout(verticalFrame);
         verticalLayout_2->setSpacing(1);
         verticalLayout_2->setObjectName("verticalLayout_2");
@@ -156,7 +152,7 @@ public:
         quizScrollArea->setWidgetResizable(true);
         quizContentWidget = new QWidget();
         quizContentWidget->setObjectName("quizContentWidget");
-        quizContentWidget->setGeometry(QRect(0, 0, 1000, 581));
+        quizContentWidget->setGeometry(QRect(0, 0, 1000, 583));
         sizePolicy.setHeightForWidth(quizContentWidget->sizePolicy().hasHeightForWidth());
         quizContentWidget->setSizePolicy(sizePolicy);
         quizContentWidget->setMinimumSize(QSize(500, 500));
@@ -183,6 +179,7 @@ public:
         QuizScreen->setWindowTitle(QCoreApplication::translate("QuizScreen", "Form", nullptr));
         labelUserName->setText(QCoreApplication::translate("QuizScreen", "QuizGenie", nullptr));
         label->setText(QCoreApplication::translate("QuizScreen", "Total Questions: 10", nullptr));
+        verticalFrame->setStyleSheet(QString());
         submitButton->setText(QCoreApplication::translate("QuizScreen", "Submit", nullptr));
     } // retranslateUi
 

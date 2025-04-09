@@ -20,6 +20,7 @@ public:
     bool isAuthenticated() const;
     void showImageInMessageBox(const QString &imagePath, const QString &title, const QString &text);
     void sendScore(QString score);
+    bool saveToFile(const QString &content);
 
 private:
     QTcpSocket *socket;
