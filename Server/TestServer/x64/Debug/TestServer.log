@@ -1,5 +1,5 @@
 ﻿  server.cpp
-C:\Conestoga\Year 2\Term 2\Project IV\TestServer\TestServer\server.cpp(92,32): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
-C:\Conestoga\Year 2\Term 2\Project IV\TestServer\TestServer\server.cpp(100,40): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
-C:\Conestoga\Year 2\Term 2\Project IV\TestServer\TestServer\server.cpp(293,50): warning C4101: 'e': unreferenced local variable
-  TestServer.vcxproj -> C:\Conestoga\Year 2\Term 2\Project IV\TestServer\x64\Debug\TestServer.exe
+C:\Conestoga\Year 2\Term 2\Project IV\proj4\Section3-Group7-QuizGenie\Server\TestServer\server.cpp(92,32): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Conestoga\Year 2\Term 2\Project IV\proj4\Section3-Group7-QuizGenie\Server\TestServer\server.cpp(100,40): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Conestoga\Year 2\Term 2\Project IV\proj4\Section3-Group7-QuizGenie\Server\TestServer\server.cpp(293,50): warning C4101: 'e': unreferenced local variable
+  TestServer.vcxproj -> C:\Conestoga\Year 2\Term 2\Project IV\proj4\Section3-Group7-QuizGenie\Server\x64\Debug\TestServer.exe

@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Conestoga\\Year 2\\Term 2\\Project IV\\TestServer\\",
+  "WorkspaceRootPath": "C:\\Conestoga\\Year 2\\Term 2\\Project IV\\proj4\\Section3-Group7-QuizGenie\\Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E79B126E-624E-4B32-BF0E-116F3E6E1141}|TestServer\\TestServer.vcxproj|C:\\Conestoga\\Year 2\\Term 2\\Project IV\\TestServer\\TestServer\\server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E79B126E-624E-4B32-BF0E-116F3E6E1141}|TestServer\\TestServer.vcxproj|C:\\Conestoga\\Year 2\\Term 2\\Project IV\\proj4\\Section3-Group7-QuizGenie\\Server\\TestServer\\server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E79B126E-624E-4B32-BF0E-116F3E6E1141}|TestServer\\TestServer.vcxproj|solutionrelative:TestServer\\server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -36,9 +36,9 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "server.cpp",
-              "DocumentMoniker": "C:\\Conestoga\\Year 2\\Term 2\\Project IV\\TestServer\\TestServer\\server.cpp",
+              "DocumentMoniker": "C:\\Conestoga\\Year 2\\Term 2\\Project IV\\proj4\\Section3-Group7-QuizGenie\\Server\\TestServer\\server.cpp",
               "RelativeDocumentMoniker": "TestServer\\server.cpp",
-              "ToolTip": "C:\\Conestoga\\Year 2\\Term 2\\Project IV\\TestServer\\TestServer\\server.cpp",
+              "ToolTip": "C:\\Conestoga\\Year 2\\Term 2\\Project IV\\proj4\\Section3-Group7-QuizGenie\\Server\\TestServer\\server.cpp",
               "RelativeToolTip": "TestServer\\server.cpp",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",

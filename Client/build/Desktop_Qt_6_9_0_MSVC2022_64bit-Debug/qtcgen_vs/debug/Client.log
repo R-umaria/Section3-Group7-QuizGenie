@@ -1,0 +1,15 @@
+﻿  Generate moc_predefs.h
+   Qt/MSBuild: 3.3.1.1
+   Qt: 6.9.0
+  client.cpp
+  home_screen.cpp
+  login_screen.cpp
+  main.cpp
+  quiz_screen.cpp
+C:\Conestoga\Year 2\Term 2\Project IV\proj4\Section3-Group7-QuizGenie\Client\login_screen.cpp(134,42): warning C4100: 'event': unreferenced formal parameter
+  qrc_resources.cpp
+  moc_client.cpp
+  moc_home_screen.cpp
+  moc_login_screen.cpp
+  moc_quiz_screen.cpp
+  Client.vcxproj -> C:\Conestoga\Year 2\Term 2\Project IV\proj4\Section3-Group7-QuizGenie\Client\build\Desktop_Qt_6_9_0_MSVC2022_64bit-Debug\qtcgen_vs\debug\Client.exe
