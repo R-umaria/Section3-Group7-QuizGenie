@@ -5,7 +5,6 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QMessageBox>
-#include <QMovie>
 #include <QTimer>
 #include "quiz_screen.h"
 #include "client.h"
@@ -32,7 +31,6 @@ private slots:
 private:
     Ui::HomePage *ui;
     QString pdfFilePath;
-    QMovie *loadingMovie;
     QTimer *csvCheckTimer;
     QString userName;
     Client *client;
