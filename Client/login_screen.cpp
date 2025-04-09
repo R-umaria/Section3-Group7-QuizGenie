@@ -107,7 +107,7 @@ void MainWindow::showCustomMessageBox(const QString &title, const QString &text,
                          "color: #FAF6F0;"
                          "}"
                          "QMessageBox QPushButton {"
-                         "background-color: #8d7cd0;"
+                         "background-color: #ada1dd;"
                          "border-radius: 5px;"
                          "color: #FAF6F0;"
                          "padding: 5px;"
