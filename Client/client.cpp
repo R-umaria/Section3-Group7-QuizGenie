@@ -270,6 +270,7 @@ QString Client::receiveImage() {
         if (socket->bytesAvailable() > 0) {
             QByteArray chunk = socket->read(1024);  // Read in chunks of 1KB
             qDebug() << "Received " << chunk.size() << " bytes, Total received: " << bytesReceived;
+            saveToFile("Received " + QString::number(chunk.size()) + " bytes from the Server.\n");
             imageData.append(chunk);
             bytesReceived += chunk.size();
         } else {
