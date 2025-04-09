@@ -32,14 +32,45 @@ QuizScreen::QuizScreen(Client *client, QWidget *parent, QString userName) :
                                     "background-color: #8d7cd0;"
                                     "color: white;"
                                     "border-radius: 8px;"
-                                    "padding: 8px 16px;"
+                                    "padding: 5px 12px;"
                                     "font-size: 14px;"
                                     "}"
                                     "QPushButton:hover {"
                                     "background-color: #7865c8;"
                                     "}");
-}
 
+    // Apply styling to quizScrollArea's scrollbar and background
+    ui->quizScrollArea->setStyleSheet(
+        "QScrollBar:vertical {"
+        "    border: none;"
+        "    background: #f0f0f0;"
+        "    width: 8px;"
+        "    margin: 0px 0px 0px 0px;"
+        "}"
+        "QScrollBar::handle:vertical {"
+        "    background: #8d7cd0;"
+        "    min-height: 20px;"
+        "    border-radius: 4px;"
+        "}"
+        "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {"
+        "    background: none;"
+        "    height: 0px;"
+        "}"
+        "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {"
+        "    width: 0px;"
+        "    height: 0px;"
+        "}"
+        "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {"
+        "    background: none;"
+        "}"
+        "QScrollArea {"
+        "    background-color: #f4eff5;"
+        "}"
+        "QWidget {"
+        "    background-color: #f4eff5;"
+        "}"
+    );
+}
 
 QuizScreen::~QuizScreen()
 {
@@ -139,7 +170,7 @@ void QuizScreen::showCustomMessageBox(const QString &title, const QString &text,
                          "color: #FAF6F0;"
                          "}"
                          "QMessageBox QPushButton {"
-                         "background-color: #8d7cd0;"
+                         "background-color: #ada1dd;"
                          "border-radius: 5px;"
                          "color: #FAF6F0;"
                          "padding: 5px;"
