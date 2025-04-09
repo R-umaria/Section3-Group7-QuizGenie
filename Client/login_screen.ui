@@ -358,9 +358,7 @@ margin: 1px;</string>
                 <bool>false</bool>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: #211726;
-border-radius: 8px;
-color: #FAF6F0;</string>
+                <string notr="true"/>
                </property>
                <property name="text">
                 <string>Login</string>

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include "home_screen.h"
+#include "client.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,7 +17,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(Client *client, QWidget *parent = nullptr);
     ~MainWindow();
 
 protected:
@@ -24,8 +25,11 @@ protected:
 
 private slots:
     void on_loginButton_clicked();  // Function to handle login
+    void showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon);
 
 private:
     Ui::MainWindow *ui;
+    Client *client;
 };
+
 #endif // LOGIN_SCREEN_H

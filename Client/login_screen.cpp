@@ -5,10 +5,11 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QPainterPath>
+#include <QMessageBox>
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(Client *client, QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::MainWindow), client(client)
 {
     ui->setupUi(this);
 
@@ -51,6 +52,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Connect login button to slot
     connect(ui->Login_Btn, &QPushButton::clicked, this, &MainWindow::on_loginButton_clicked);
+
+    // Apply styling to Login button
+    ui->Login_Btn->setStyleSheet("QPushButton {"
+                                 "background-color: #211726;"
+                                 "border-radius: 8px;"
+                                 "color: #FAF6F0;"
+                                 "}"
+                                 "QPushButton:hover {"
+                                 "background-color: #7865c8;"
+                                 "}");
+
 }
 
 MainWindow::~MainWindow()
@@ -63,16 +75,59 @@ void MainWindow::on_loginButton_clicked()
     QString username = ui->User_name_txtfield->text();
     QString password = ui->Password_txtfield->text();
 
-    if (username == "admin" && password == "1234") {
-        QMessageBox::information(this, "Login", "Login successful!");
+    if(client->authenticate(username, password)) {
+        showCustomMessageBox("Login", "Login successful!", QMessageBox::Information);
 
         // Open HomePage and pass the user's name
-        HomePage *homePage = new HomePage(nullptr, "Admin");
+        HomePage *homePage = new HomePage(client, nullptr, username);
         homePage->show();
         this->close();  // Close login window
     } else {
-        QMessageBox::warning(this, "Login", "Invalid username or password!");
+        showCustomMessageBox("Login", "Invalid username or password!", QMessageBox::Warning);
     }
+}
+
+void MainWindow::showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon)
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(title);
+    msgBox.setText(text);
+    msgBox.setIcon(icon);
+
+    // Set a larger minimum size for the message box
+    msgBox.setMinimumSize(350, 250);
+
+    // Apply custom stylesheet
+    msgBox.setStyleSheet("QMessageBox {"
+                         "background-color: #beb4e4;"
+                         "color: #7865c8;"
+                         "font-size: 16px;"
+                         "}"
+                         "QMessageBox QLabel {"
+                         "color: #FAF6F0;"
+                         "}"
+                         "QMessageBox QPushButton {"
+                         "background-color: #8d7cd0;"
+                         "border-radius: 5px;"
+                         "color: #FAF6F0;"
+                         "padding: 5px;"
+                         "}"
+                         "QMessageBox QPushButton:hover {"
+                         "background-color: #7865c8;"
+                         "}");
+
+    // Apply drop shadow effect
+    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect(&msgBox);
+    shadowEffect->setBlurRadius(20);
+    shadowEffect->setXOffset(0);
+    shadowEffect->setYOffset(0);
+    shadowEffect->setColor(QColor(0, 0, 0, 160));
+    msgBox.setGraphicsEffect(shadowEffect);
+
+    // Ensure the background is fully transparent around the rounded corners
+    msgBox.setAttribute(Qt::WA_StyledBackground);
+
+    msgBox.exec();
 }
 
 // Paint Event for the Central Widget (not the QMainWindow)

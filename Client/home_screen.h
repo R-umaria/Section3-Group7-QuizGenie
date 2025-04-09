@@ -7,7 +7,8 @@
 #include <QMessageBox>
 #include <QMovie>
 #include <QTimer>
-
+#include "quiz_screen.h"
+#include "client.h"
 
 namespace Ui {
 class HomePage;
@@ -18,7 +19,7 @@ class HomePage : public QWidget
     Q_OBJECT
 
 public:
-    explicit HomePage(QWidget *parent = nullptr, QString userName = "");
+    explicit HomePage(Client *client, QWidget *parent = nullptr, QString userName = "");
     ~HomePage();
 
 private slots:
@@ -26,6 +27,7 @@ private slots:
     void on_btnGenerateQuiz_clicked();
     void on_btnStartQuiz_clicked();
     void checkForCSVFile(); // Checks if CSV exists
+    void showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon);
 
 private:
     Ui::HomePage *ui;
@@ -33,6 +35,7 @@ private:
     QMovie *loadingMovie;
     QTimer *csvCheckTimer;
     QString userName;
+    Client *client;
 };
 
 #endif // HOME_SCREEN_H
