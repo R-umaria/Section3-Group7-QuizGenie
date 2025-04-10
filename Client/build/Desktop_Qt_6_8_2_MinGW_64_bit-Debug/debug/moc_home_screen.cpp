@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../../home_screen.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -42,7 +43,11 @@ static constexpr auto qt_meta_stringdata_ZN8HomePageE = QtMocHelpers::stringData
     "",
     "on_btnGenerateQuiz_clicked",
     "on_btnStartQuiz_clicked",
-    "checkForCSVFile"
+    "showCustomMessageBox",
+    "title",
+    "text",
+    "QMessageBox::Icon",
+    "icon"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -65,13 +70,13 @@ Q_CONSTINIT static const uint qt_meta_data_ZN8HomePageE[] = {
        1,    0,   38,    2, 0x08,    1 /* Private */,
        3,    0,   39,    2, 0x08,    2 /* Private */,
        4,    0,   40,    2, 0x08,    3 /* Private */,
-       5,    0,   41,    2, 0x08,    4 /* Private */,
+       5,    3,   41,    2, 0x08,    4 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, 0x80000000 | 8,    6,    7,    9,
 
        0        // eod
 };
@@ -91,8 +96,11 @@ Q_CONSTINIT const QMetaObject HomePage::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_btnStartQuiz_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'checkForCSVFile'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        // method 'showCustomMessageBox'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QMessageBox::Icon, std::false_type>
     >,
     nullptr
 } };
@@ -105,11 +113,10 @@ void HomePage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 0: _t->on_btnUploadPDF_clicked(); break;
         case 1: _t->on_btnGenerateQuiz_clicked(); break;
         case 2: _t->on_btnStartQuiz_clicked(); break;
-        case 3: _t->checkForCSVFile(); break;
+        case 3: _t->showCustomMessageBox((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QMessageBox::Icon>>(_a[3]))); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *HomePage::metaObject() const

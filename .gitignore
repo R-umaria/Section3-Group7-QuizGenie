@@ -9,5 +9,19 @@ __pycache__/
 *.so
 structure.txt
 C:\Users\Rishi\source\repos\Project 4\Group Project\QuizGenie\Server\pdf_mcq_generator\config.py
+
 Client/Client.pro.user
 Client/client.pro.user
+
+# Ignore everything inside the Client build folder for Desktop Qt Debug builds
+Client/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Debug/*
+
+# Re-include the important qtcgen_vs directory and its contents
+!Client/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Debug/qtcgen_vs/
+!Client/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Debug/qtcgen_vs/**
+
+# But ignore the .vs folder inside qtcgen_vs (and everything within it)
+Client/build/Desktop_Qt_6_9_0_MSVC2022_64bit-Debug/qtcgen_vs/.vs/
+
+# Ignore Visual Studio temporary files in the Server directory
+Server/.vs/

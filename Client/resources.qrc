@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>assets/Logo.png</file>
         <file>assets/logo_horizontal.png</file>
-        <file>assets/loading.gif</file>
         <file>UploadedPDFs/mcq_output.csv</file>
+        <file>assets/gemini-icon.svg</file>
     </qresource>
 </RCC>
