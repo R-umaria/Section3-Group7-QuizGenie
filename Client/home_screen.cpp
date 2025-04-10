@@ -11,7 +11,7 @@
 HomePage::HomePage(Client* client, QWidget* parent, QString userName) :
     QWidget(parent),
     ui(new Ui::HomePage),
-    csvCheckTimer(new QTimer(this)),
+    // csvCheckTimer(new QTimer(this)),
     userName(userName),
     client(client)
 {
@@ -71,14 +71,14 @@ HomePage::HomePage(Client* client, QWidget* parent, QString userName) :
     // Disable start button initially
     ui->btnStartQuiz->setEnabled(false);
 
-    // Setup CSV file check timer
-    connect(csvCheckTimer, &QTimer::timeout, this, &HomePage::checkForCSVFile);
+    // // Setup CSV file check timer
+    // connect(csvCheckTimer, &QTimer::timeout, this, &HomePage::checkForCSVFile);
 }
 
 HomePage::~HomePage()
 {
     delete ui;
-    delete csvCheckTimer;
+    //delete csvCheckTimer;
 }
 
 void HomePage::on_btnUploadPDF_clicked()
@@ -132,25 +132,27 @@ void HomePage::on_btnGenerateQuiz_clicked()
     client->receiveCSV();
     qDebug() << "Received csv from server";
 
-    // Start checking for CSV every 3 seconds
-    csvCheckTimer->start(3000);
+    // Enable Start Quiz button once CSV is received
+    ui->btnStartQuiz->setEnabled(true);
+    showCustomMessageBox("Quiz Ready", "Quiz generated successfully! You can now start.", QMessageBox::Information);
+
 }
 
-void HomePage::checkForCSVFile()
-{
-    QString csvFolder = QDir::currentPath() + "/UploadedPDFs/";
-    QDir dir(csvFolder);
-    QStringList csvFiles = dir.entryList(QStringList() << "*.csv", QDir::Files);
+// void HomePage::checkForCSVFile()
+// {
+//     QString csvFolder = QDir::currentPath() + "/UploadedPDFs/";
+//     QDir dir(csvFolder);
+//     QStringList csvFiles = dir.entryList(QStringList() << "*.csv", QDir::Files);
 
-    if (!csvFiles.isEmpty()) {
-        // CSV found, stop timer
-        csvCheckTimer->stop();
+//     if (!csvFiles.isEmpty()) {
+//         // CSV found, stop timer
+//         csvCheckTimer->stop();
 
-        // Enable Start button
-        ui->btnStartQuiz->setEnabled(true);
-        showCustomMessageBox("Quiz Ready", "Quiz generated successfully! You can now start.", QMessageBox::Information);
-    }
-}
+//         // Enable Start button
+//         ui->btnStartQuiz->setEnabled(true);
+//         showCustomMessageBox("Quiz Ready", "Quiz generated successfully! You can now start.", QMessageBox::Information);
+//     }
+// }
 
 void HomePage::on_btnStartQuiz_clicked()
 {

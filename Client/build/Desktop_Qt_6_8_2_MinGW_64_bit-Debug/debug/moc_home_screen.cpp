@@ -43,7 +43,6 @@ static constexpr auto qt_meta_stringdata_ZN8HomePageE = QtMocHelpers::stringData
     "",
     "on_btnGenerateQuiz_clicked",
     "on_btnStartQuiz_clicked",
-    "checkForCSVFile",
     "showCustomMessageBox",
     "title",
     "text",
@@ -60,7 +59,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN8HomePageE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -68,18 +67,16 @@ Q_CONSTINIT static const uint qt_meta_data_ZN8HomePageE[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   44,    2, 0x08,    1 /* Private */,
-       3,    0,   45,    2, 0x08,    2 /* Private */,
-       4,    0,   46,    2, 0x08,    3 /* Private */,
-       5,    0,   47,    2, 0x08,    4 /* Private */,
-       6,    3,   48,    2, 0x08,    5 /* Private */,
+       1,    0,   38,    2, 0x08,    1 /* Private */,
+       3,    0,   39,    2, 0x08,    2 /* Private */,
+       4,    0,   40,    2, 0x08,    3 /* Private */,
+       5,    3,   41,    2, 0x08,    4 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, 0x80000000 | 9,    7,    8,   10,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, 0x80000000 | 8,    6,    7,    9,
 
        0        // eod
 };
@@ -99,8 +96,6 @@ Q_CONSTINIT const QMetaObject HomePage::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_btnStartQuiz_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'checkForCSVFile'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'showCustomMessageBox'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
@@ -118,8 +113,7 @@ void HomePage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 0: _t->on_btnUploadPDF_clicked(); break;
         case 1: _t->on_btnGenerateQuiz_clicked(); break;
         case 2: _t->on_btnStartQuiz_clicked(); break;
-        case 3: _t->checkForCSVFile(); break;
-        case 4: _t->showCustomMessageBox((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QMessageBox::Icon>>(_a[3]))); break;
+        case 3: _t->showCustomMessageBox((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QMessageBox::Icon>>(_a[3]))); break;
         default: ;
         }
     }
@@ -144,14 +138,14 @@ int HomePage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 4;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 4;
     }
     return _id;
 }

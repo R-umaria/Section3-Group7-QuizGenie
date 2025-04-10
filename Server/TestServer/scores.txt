@@ -46,3 +46,5 @@ Client Score: 10/10
 Client Score: 0/10
 Client Score: 0/10
 Client Score: 0/10
+Client Score: 5/10
+Client Score: 6/10

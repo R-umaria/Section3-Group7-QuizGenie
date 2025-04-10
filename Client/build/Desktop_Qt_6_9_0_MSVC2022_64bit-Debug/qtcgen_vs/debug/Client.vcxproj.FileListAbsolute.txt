@@ -1,2 +1,1 @@
-C:\Conestoga\Year 2\Term 2\Project IV\proj4\Section3-Group7-QuizGenie\Client\build\Desktop_Qt_6_9_0_MSVC2022_64bit-Debug\qtcgen_vs\debug\Client.exe
 C:\Users\Rishi\source\repos\Project 4\Group Project\QuizGenie\Client\build\Desktop_Qt_6_9_0_MSVC2022_64bit-Debug\qtcgen_vs\debug\Client.exe

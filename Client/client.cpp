@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QDateTime>
+#include <QElapsedTimer>
 
 const QString SERVER_IP = "127.0.0.1";
 const int SERVER_PORT = 27000;
@@ -174,72 +175,143 @@ void Client::sendPDF(const QString &pdfFilePath)
     }
 }
 
+// void Client::receiveCSV()
+// {
+//     //Wait for response
+//     qDebug() << "attempting to wait for ready read";
+//     if (!socket->waitForReadyRead()) {
+//         saveToFile("Couldn't receive CSV from Server.\n");
+//         showCustomMessageBox("Read Error", "Couldn't receive CSV file.", QMessageBox::Critical);
+//         qDebug() <<"NO CSV";
+//         return;
+//     }
+
+//     qDebug() <<"Attempting to read file from server";
+//     //Read file data from server
+//     QByteArray fileData;
+//     while(socket->bytesAvailable() > 0) {
+//         QByteArray chunk = socket->readAll();
+//         fileData.append(chunk);
+//     }
+
+//     if(fileData.isEmpty()) {
+//         saveToFile("No CSV received from Server.\n");
+//         showCustomMessageBox("No Data", "No CSV file received from the server.", QMessageBox::Critical);
+//         return;
+//     }
+//     saveToFile("CSV received from Server.\n");
+
+//     //Create directory for file
+//         //Folder
+//     QString csvFolder = QDir::currentPath() + "/UploadedPDFs/";
+//     QDir().mkpath(csvFolder);
+
+//         //File name
+//     QString fileName = "mcq_output.csv";
+//     QString newFilePath = csvFolder + fileName;
+
+//     //Remove file if already exists
+//     if(QFile::exists(newFilePath)) {
+//         QFile::remove(newFilePath);
+//     }
+
+//     //Save data into the file
+//     QFile file(newFilePath);
+//     if(file.open(QIODevice::WriteOnly)) {
+//         file.write(fileData);
+//         file.close();
+//         saveToFile("CSV saved.\n");
+//         qDebug() <<"CSV file saved successfully";
+//     } else {
+//         saveToFile("Couldn't save CSV file.\n");
+//         showCustomMessageBox("File Error", "Failed to save CSV file.", QMessageBox::Critical);
+//     }
+
+//     //check to make sure csv received correctly
+//     //   ->can delete after debugging
+//     QFile printFile(newFilePath);
+//     if (printFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+//         QTextStream in(&printFile);
+//         qDebug() << "=== CSV File Contents ===";
+//         while (!in.atEnd()) {
+//             QString line = in.readLine();
+//             qDebug().noquote() << line;
+//         }
+//         qDebug() << "==========================";
+//         printFile.close();
+//     } else {
+//         qDebug() << "Failed to open CSV file for reading.";
+//     }
+// }
+
 void Client::receiveCSV()
 {
-    //Wait for response
-    qDebug() << "attempting to wait for ready read";
-    if (!socket->waitForReadyRead()) {
-        saveToFile("Couldn't receive CSV from Server.\n");
-        showCustomMessageBox("Read Error", "Couldn't receive CSV file.", QMessageBox::Critical);
-        qDebug() <<"NO CSV";
-        return;
-    }
+    qDebug() << "Waiting for CSV data from server...";
 
-    qDebug() <<"Attempting to read file from server";
-    //Read file data from server
     QByteArray fileData;
-    while(socket->bytesAvailable() > 0) {
-        QByteArray chunk = socket->readAll();
-        fileData.append(chunk);
+    QElapsedTimer timer;
+    timer.start();
+
+    // Timeout after 30 seconds if nothing is received
+    while (timer.elapsed() < 30000) {
+        if (socket->waitForReadyRead(1000)) {
+            QByteArray chunk = socket->readAll();
+            if (!chunk.isEmpty()) {
+                fileData.append(chunk);
+                qDebug() << "Received chunk of size: " << chunk.size();
+            }
+        } else {
+            // If we’ve already received some data and no more is coming
+            if (!fileData.isEmpty()) {
+                break;
+            }
+        }
     }
 
-    if(fileData.isEmpty()) {
+    if (fileData.isEmpty()) {
         saveToFile("No CSV received from Server.\n");
         showCustomMessageBox("No Data", "No CSV file received from the server.", QMessageBox::Critical);
         return;
     }
+
     saveToFile("CSV received from Server.\n");
 
-    //Create directory for file
-        //Folder
+    // Create directory for file
     QString csvFolder = QDir::currentPath() + "/UploadedPDFs/";
     QDir().mkpath(csvFolder);
 
-        //File name
     QString fileName = "mcq_output.csv";
     QString newFilePath = csvFolder + fileName;
 
-    //Remove file if already exists
-    if(QFile::exists(newFilePath)) {
+    // Remove file if already exists
+    if (QFile::exists(newFilePath)) {
         QFile::remove(newFilePath);
     }
 
-    //Save data into the file
+    // Save data into the file
     QFile file(newFilePath);
-    if(file.open(QIODevice::WriteOnly)) {
+    if (file.open(QIODevice::WriteOnly)) {
         file.write(fileData);
         file.close();
         saveToFile("CSV saved.\n");
-        qDebug() <<"CSV file saved successfully";
+        qDebug() << "CSV file saved successfully.";
     } else {
         saveToFile("Couldn't save CSV file.\n");
         showCustomMessageBox("File Error", "Failed to save CSV file.", QMessageBox::Critical);
+        return;
     }
 
-    //check to make sure csv received correctly
-    //   ->can delete after debugging
-    QFile printFile(newFilePath);
-    if (printFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QTextStream in(&printFile);
+    // Debug output (optional)
+    QFile debugFile(newFilePath);
+    if (debugFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&debugFile);
         qDebug() << "=== CSV File Contents ===";
         while (!in.atEnd()) {
             QString line = in.readLine();
             qDebug().noquote() << line;
         }
         qDebug() << "==========================";
-        printFile.close();
-    } else {
-        qDebug() << "Failed to open CSV file for reading.";
+        debugFile.close();
     }
 }
 
