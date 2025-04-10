@@ -159,7 +159,7 @@ void HomePage::on_btnStartQuiz_clicked()
     qDebug() << "Starting QuizScreen";
 
     // Avoid creating multiple instances
-    static QuizScreen* quizScreen = nullptr;
+    QuizScreen* quizScreen = nullptr;
 
     if (quizScreen == nullptr) {
         quizScreen = new QuizScreen(client, nullptr, userName);
