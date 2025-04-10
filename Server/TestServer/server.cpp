@@ -16,7 +16,6 @@ void sendAll(SOCKET clientSocket, const std::string &data) {
     int dataSize = static_cast<int>(data.size());
     while (totalSent < dataSize) {
         int sent = send(clientSocket, data.c_str() + totalSent, dataSize - totalSent, 0);
-        std::cout << "sent " << totalSent << " bytes of data" << std::endl;
         if (sent == SOCKET_ERROR) {
             std::cerr << "Send failed.\n";
             return;

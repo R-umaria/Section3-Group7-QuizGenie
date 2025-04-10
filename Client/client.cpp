@@ -252,8 +252,8 @@ void Client::receiveCSV()
     QElapsedTimer timer;
     timer.start();
 
-    // Timeout after 30 seconds if nothing is received
-    while (timer.elapsed() < 30000) {
+    // Timeout after 1 minute if nothing is received
+    while (timer.elapsed() < 600000) {
         if (socket->waitForReadyRead(1000)) {
             QByteArray chunk = socket->readAll();
             if (!chunk.isEmpty()) {
