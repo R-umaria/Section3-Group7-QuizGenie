@@ -67,52 +67,31 @@ namespace UnitTests_Server
             remove(testCsv.c_str());
         }
 
-        // Test for the saveToFile function
-        // Note: Since saveToFile writes to a hard-coded "log.txt", we back up any existing content,
-        // call saveToFile, then check the appended log, and finally restore the original log.
-
-        TEST_METHOD(TestSaveToFile_AppendsLogMessage)
+        // Test that saveToFile function can open a file and saves to that file
+        TEST_METHOD(TestSaveToFile_Open_and_WriteToFile)
         {
-            const char* logFilename = "log.txt";
-            std::string backup;
+            //Remove log.txt if it exists
+            std::remove("log.txt");
 
-            // Backup existing log.txt content if it exists
-            std::ifstream infile(logFilename, std::ios::binary);
-            if (infile.good())
-            {
-                std::stringstream buffer;
-                buffer << infile.rdbuf();
-                backup = buffer.str();
-                infile.close();
-            }
-
-            // Remove existing log.txt to have a clean file for testing
-            remove(logFilename);
-
-            std::string testMessage = "Unit test log message.\n";
+            std::string testMessage = "Test message\n";
             saveToFile(testMessage);
 
-            // Verify that log.txt was created and contains our test message.
-            std::ifstream logfile(logFilename);
-            Assert::IsTrue(logfile.good(), L"log.txt was not created after calling saveToFile.");
+            //Open file to verify contents
+            std::ifstream file("log.txt");
+            Assert::IsTrue(file.is_open(), L"Failed to open log.txt after writing.");
 
-            std::string logContent;
-            std::getline(logfile, logContent);
-            // Because saveToFile prepends a timestamp, we check if our message appears in the logged line.
-            Assert::IsTrue(logContent.find("Unit test log message.") != std::string::npos, L"Test log message not found in log.txt.");
-            logfile.close();
+            //Read entire file
+            std::string fileContents;
+            std::string line;
+            while (std::getline(file, line))
+            {
+                fileContents += line + "\n";
+            }
+            file.close();
 
-            // Restore original log.txt if it was backed up; otherwise, clean up.
-            if (!backup.empty())
-            {
-                std::ofstream outfile(logFilename, std::ios::binary);
-                outfile << backup;
-                outfile.close();
-            }
-            else
-            {
-                remove(logFilename);
-            }
+            //Check that file contains message
+            Assert::IsTrue(fileContents.find(testMessage) != std::string::npos);
+            std::remove("log.txt");
         }
     };
 }
