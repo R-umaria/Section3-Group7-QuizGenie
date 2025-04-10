@@ -285,12 +285,12 @@ void sendImage(SOCKET clientSocket, const std::string &imagePath){
                                 std::cout << "score: " << score << "/10";
                                 scoreFile.close();
                                 if (score >= 5) {
-                                    std::string imageFilePath = "win.jpg";
+                                    std::string imageFilePath = "win.png";
                                     sendImage(clientSocket, imageFilePath);
                                     saveToFile("Win Image sent to Client.\n");
                                 }
                                 else if (score < 5) {
-                                    std::string imageFilePath = "lose.jpg";
+                                    std::string imageFilePath = "lose.png";
                                     sendImage(clientSocket, imageFilePath);
                                     saveToFile("Lose Image sent to Client.\n");
                                 }

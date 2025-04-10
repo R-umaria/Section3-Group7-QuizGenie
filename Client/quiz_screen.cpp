@@ -5,6 +5,9 @@
 #include <QFileDialog>
 #include <QRegularExpression>
 #include <QGraphicsDropShadowEffect>
+#include <QMessageBox>
+#include <QCoreApplication>
+#include <QApplication>  // For qApp
 
 QuizScreen::QuizScreen(Client *client, QWidget *parent, QString userName) :
     QWidget(parent),
@@ -13,9 +16,6 @@ QuizScreen::QuizScreen(Client *client, QWidget *parent, QString userName) :
     client(client)
 {
     ui->setupUi(this);
-
-    // Set user's name from login
-    //ui->labelUserName->setText("Welcome, " + userName);
 
     // Retrieve the layout from the .ui file
     questionsLayout = qobject_cast<QVBoxLayout*>(ui->quizContentWidget->layout());
@@ -115,18 +115,14 @@ void QuizScreen::loadQuestionsFromCSV(const QString &csvFilePath)
         // Extract question and options
         // Pkt Def: Question,Option1,Option2,Option3,Option4,Answer
         QString question = fields[0];
-        QStringList options = fields.mid(1, 4); // Adds answer choices
-        correctAnswers.append(fields[5]); // Adds correct answers
+        QStringList options = fields.mid(1, 4); // Answer choices
+        correctAnswers.append(fields[5]); // Correct answer
 
         // Create a container for each question and its options
         QWidget *questionWidget = new QWidget(this);
         QVBoxLayout *questionLayout = new QVBoxLayout(questionWidget);
 
-        // Add question label with styling
-        //QLabel *questionLabel = new QLabel(question, questionWidget);
-
         QLabel *questionLabel = new QLabel(QString("%1. %2").arg(questionNumber).arg(question), questionWidget);
-
         questionLabel->setWordWrap(true);
         questionLabel->setStyleSheet("font-size: 16px; font-weight: bold; margin-bottom: 10px;");
         questionLayout->addWidget(questionLabel);
@@ -137,7 +133,7 @@ void QuizScreen::loadQuestionsFromCSV(const QString &csvFilePath)
         for (int i = 0; i < options.size(); ++i) {
             QString optionText = options[i];
             QRadioButton *optionButton = new QRadioButton(optionText, questionWidget);
-            optionButton->setStyleSheet("font-size: 14px; padding: 5px; margin-left: 20px;"); // Add margin-left for padding
+            optionButton->setStyleSheet("font-size: 14px; padding: 5px; margin-left: 20px;");
             questionLayout->addWidget(optionButton);
             buttonGroup->addButton(optionButton, i);
         }
@@ -153,12 +149,72 @@ void QuizScreen::loadQuestionsFromCSV(const QString &csvFilePath)
     file.close();
 }
 
-void QuizScreen::showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon)
+//
+// Modified onSubmitClicked:
+// 1. First, show an informational pop-up with only an "OK" button.
+// 2. Then, calculate the score and show a second message box that displays the score (with an image)
+//    that has two buttons: one to return to home screen and one to close the application.
+//
+void QuizScreen::onSubmitClicked()
+{
+    // --- First pop-up: Informational only ---
+    QMessageBox infoBox;
+    infoBox.setWindowTitle("Quiz Submitted");
+    infoBox.setText("Your score is now being calculated.");
+    infoBox.setIcon(QMessageBox::Information);
+    infoBox.setStandardButtons(QMessageBox::Ok);
+    infoBox.exec();
+
+    // --- Calculate score ---
+    int correctCount = 0;
+    for (int i = 0; i < buttonGroups.size(); ++i) {
+        QAbstractButton *selected = buttonGroups[i]->checkedButton();
+        if (!selected) {
+            continue; // User didn't select an answer for this question
+        }
+        QString userAnswer = selected->text().trimmed();
+        QString correctAnswer = correctAnswers[i].trimmed();
+        qDebug() << "Q" << i + 1 << ": User =" << userAnswer << " | Correct =" << correctAnswer;
+        if (userAnswer.compare(correctAnswer, Qt::CaseInsensitive) == 0) {
+            correctCount++;
+        }
+    }
+
+    // Determine outcome and message text
+    QString title, text;
+    if (correctCount < 5) {
+        title = "Quiz Failed!";
+        text = QString("You failed the quiz! You got %1/%2").arg(correctCount).arg(correctAnswers.size());
+    } else {
+        title = "Quiz Passed!";
+        text = QString("Good Job! You got %1/%2!").arg(correctCount).arg(correctAnswers.size());
+    }
+
+    // Send the score via your client (if needed)
+    QString score = QString::number(correctCount);
+    client->sendScore(score);
+
+    // Receive image from the client (assuming it returns a QPixmap)
+    QPixmap scoreImage = client->receiveImage();
+
+    // --- Second pop-up: Display score with image and two action buttons ---
+    showScoreMessageBox(title, text, scoreImage);
+}
+
+//
+// New function: showScoreMessageBox
+// Displays a message box that shows the given image, title and text.
+// It also adds two buttons: one to navigate back to HomePage and one to close the application.
+//
+void QuizScreen::showScoreMessageBox(const QString &title, const QString &text, const QPixmap &image)
 {
     QMessageBox msgBox;
     msgBox.setWindowTitle(title);
     msgBox.setText(text);
-    msgBox.setIcon(icon);
+
+    // Scale the image: adjust w, h to your desired max width/height.
+    QPixmap scaledImage = image.scaled(300, 300, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    msgBox.setIconPixmap(scaledImage);
 
     msgBox.setMinimumSize(350, 250);
 
@@ -186,53 +242,19 @@ void QuizScreen::showCustomMessageBox(const QString &title, const QString &text,
     shadowEffect->setYOffset(0);
     shadowEffect->setColor(QColor(0, 0, 0, 160));
     msgBox.setGraphicsEffect(shadowEffect);
-
     msgBox.setAttribute(Qt::WA_StyledBackground);
 
-    // Add "Retake Quiz" button
-    QPushButton *retakeButton = msgBox.addButton("Back to HomePage", QMessageBox::ActionRole);
-    connect(retakeButton, &QPushButton::clicked, this, &QuizScreen::onRetakeQuizClicked);
+    // Add "Back to HomePage" button
+    QPushButton *homeButton = msgBox.addButton("Back to HomePage", QMessageBox::ActionRole);
+    connect(homeButton, &QPushButton::clicked, [this](){
+        this->onRetakeQuizClicked();
+    });
+
+    // Add "Close Application" button
+    QPushButton *closeButton = msgBox.addButton("Close Application", QMessageBox::ActionRole);
+    connect(closeButton, &QPushButton::clicked, qApp, &QCoreApplication::quit);
 
     msgBox.exec();
-}
-
-void QuizScreen::onSubmitClicked()
-{
-    showCustomMessageBox("Quiz Submitted", "Your score is now being calculated.", QMessageBox::Information);
-
-    int correctCount = 0;
-
-    // Calculate score
-    for (int i = 0; i < buttonGroups.size(); ++i) {
-        QAbstractButton *selected = buttonGroups[i]->checkedButton();
-        if (!selected) {
-            continue; // User didn't select an answer for this question
-        }
-
-        QString userAnswer = selected->text().trimmed();
-        QString correctAnswer = correctAnswers[i].trimmed();
-        // answer debug
-        qDebug() << "Q" << i+1 << ": User =" << userAnswer << " | Correct =" << correctAnswer;
-        if (userAnswer.compare(correctAnswer, Qt::CaseInsensitive) == 0) {
-            correctCount++;
-        }
-    }
-
-    // Calculate win/lose
-    QString title, text;
-    if(correctCount < 5) {
-        title = "Quiz Failed!";
-        text = QString("You failed the quiz! You got %1/%2").arg(correctCount).arg(correctAnswers.size());
-    }
-    else if (correctCount >= 5) {
-        title = "Quiz Passed!";
-        text = QString("Good Job! You got %1/%2!").arg(correctCount).arg(correctAnswers.size());
-    }
-    //showCustomMessageBox("Quiz Results", QString("You got %1 out of %2 correct!").arg(correctCount).arg(correctAnswers.size()), QMessageBox::Information);
-
-    QString score = QString::number(correctCount);
-    client->sendScore(score);
-    client->showImageInMessageBox(client->receiveImage(), title, text);
 }
 
 void QuizScreen::onRetakeQuizClicked()
@@ -241,4 +263,48 @@ void QuizScreen::onRetakeQuizClicked()
     HomePage *homePage = new HomePage(client, nullptr, userName);
     homePage->show();
     this->close();  // Close the current quiz screen
+}
+
+//
+// Optionally, you can leave showCustomMessageBox as-is for any generic messages elsewhere.
+// (It is no longer used in onSubmitClicked.)
+//
+void QuizScreen::showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon)
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(title);
+    msgBox.setText(text);
+    msgBox.setIcon(icon);
+    msgBox.setMinimumSize(350, 250);
+    msgBox.setStyleSheet("QMessageBox {"
+                         "background-color: #beb4e4;"
+                         "color: #7865c8;"
+                         "font-size: 16px;"
+                         "}"
+                         "QMessageBox QLabel {"
+                         "color: #FAF6F0;"
+                         "}"
+                         "QMessageBox QPushButton {"
+                         "background-color: #ada1dd;"
+                         "border-radius: 5px;"
+                         "color: #FAF6F0;"
+                         "padding: 5px;"
+                         "}"
+                         "QMessageBox QPushButton:hover {"
+                         "background-color: #7865c8;"
+                         "}");
+
+    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect(&msgBox);
+    shadowEffect->setBlurRadius(20);
+    shadowEffect->setXOffset(0);
+    shadowEffect->setYOffset(0);
+    shadowEffect->setColor(QColor(0, 0, 0, 160));
+    msgBox.setGraphicsEffect(shadowEffect);
+    msgBox.setAttribute(Qt::WA_StyledBackground);
+
+    // This version adds a default "Back to HomePage" button.
+    QPushButton *retakeButton = msgBox.addButton("Back to HomePage", QMessageBox::ActionRole);
+    connect(retakeButton, &QPushButton::clicked, this, &QuizScreen::onRetakeQuizClicked);
+
+    msgBox.exec();
 }

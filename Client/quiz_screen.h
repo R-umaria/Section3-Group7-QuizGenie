@@ -39,6 +39,7 @@ private:
     QString userName;
     Client *client;
     void showCustomMessageBox(const QString &title, const QString &text, QMessageBox::Icon icon);
+    void showScoreMessageBox(const QString &title, const QString &text, const QPixmap &image);
 };
 
 #endif // QUIZSCREEN_H

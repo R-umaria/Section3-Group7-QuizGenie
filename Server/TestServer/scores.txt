@@ -48,3 +48,6 @@ Client Score: 0/10
 Client Score: 0/10
 Client Score: 5/10
 Client Score: 6/10
+Client Score: 3/10
+Client Score: 6/10
+Client Score: 2/10
