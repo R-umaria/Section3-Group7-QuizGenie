@@ -90,7 +90,25 @@ border-radius: 29px;</string>
          <property name="spacing">
           <number>200</number>
          </property>
-         <item alignment="Qt::AlignmentFlag::AlignLeft">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">padding: 5px;
+color: #ffffff;
+background-color: rgba(0, 0,0,0);</string>
+           </property>
+           <property name="text">
+            <string>QuizGenie</string>
+           </property>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignmentFlag::AlignRight">
           <widget class="QLabel" name="labelUserName">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
@@ -112,7 +130,7 @@ border-radius: 29px;</string>
            </property>
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>16</pointsize>
              <bold>true</bold>
             </font>
            </property>
@@ -279,7 +297,8 @@ border-radius: 12px;</string>
               <string notr="true">padding: 10px; 
 color: #211726;
 border: 2px solid #211726;
-border-radius: 8px;</string>
+border-radius: 8px;
+background-color: #efecf8;</string>
              </property>
              <property name="text">
               <string>Upload PDF</string>
@@ -391,10 +410,10 @@ background-color: none;</string>
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: #211726; color: #FAF6F0;</string>
+              <string notr="true"/>
              </property>
              <property name="text">
-              <string>Generate Quiz</string>
+              <string> Generate Quiz</string>
              </property>
             </widget>
            </item>
@@ -459,8 +478,7 @@ background-color: none;</string>
               <cursorShape>PointingHandCursor</cursorShape>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: #7865c8;
-color: #FAF6F0;</string>
+              <string notr="true"/>
              </property>
              <property name="text">
               <string>Start Quiz</string>
