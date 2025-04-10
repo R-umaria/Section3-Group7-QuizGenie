@@ -76,6 +76,7 @@ void sendImage(SOCKET clientSocket, const std::string &imagePath){
             sendAll(clientSocket, chunk);
             bytesSent += chunk.size();
             std::cout << "Sent " << chunk.size() << " bytes, Total sent: " << bytesSent << std::endl;
+            saveToFile("Sent " + std::to_string(bytesSent) + " bytes to Client.\n");
         }
 
         // Send any remaining bytes if the file size isn't an exact multiple of CHUNK_SIZE
