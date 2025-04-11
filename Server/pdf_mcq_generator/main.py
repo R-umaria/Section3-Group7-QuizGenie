@@ -1,3 +1,5 @@
+# This script processes a PDF file to extract text, 
+# generates multiple-choice questions (MCQs) using the Gemini API, and saves the questions to a CSV file.
 import os
 import sys
 from src.pdf_extractor import extract_text_from_pdf

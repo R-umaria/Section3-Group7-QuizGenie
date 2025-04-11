@@ -1,3 +1,5 @@
+// QuizGenie V1.0 --final commit--
+
 #include <QApplication>
 #include "login_screen.h"
 
