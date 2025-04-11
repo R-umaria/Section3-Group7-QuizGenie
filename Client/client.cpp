@@ -253,7 +253,7 @@ void Client::receiveCSV()
     timer.start();
 
     // Timeout after 1 minute if nothing is received
-    while (timer.elapsed() < 600000) {
+    while (timer.elapsed() < 60000) {
         if (socket->waitForReadyRead(1000)) {
             QByteArray chunk = socket->readAll();
             if (!chunk.isEmpty()) {
